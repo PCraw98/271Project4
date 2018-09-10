@@ -19,11 +19,17 @@ public class SignupManage {
 	 * @param username
 	 * @param password
 	 */
-	public void addNewUser(String username, String password) {
-		//checks that username is not in use and password is valid
-		if(!usernameExists(username) && isValidPassword(password)) {
+	public int addNewUser(String username, String password) {
+		//if username is already in use, return 1
+		if(usernameExists(username)) {
+			return 1;
+		} else if(!isValidPassword(password)) {
+			//if password is not valid, return 2
+			return 2;
+		} else
+			//return 0 if user is successfully added
 			users.add(new User(username,password));
-		}
+			return 0;
 	}
 	
 	/**
