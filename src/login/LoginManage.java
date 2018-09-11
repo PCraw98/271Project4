@@ -2,6 +2,12 @@ package login;
 
 import signup.User;
 
+/**
+ * Checks for valid login credentials
+ * 
+ * @author Jasmine Jess
+ */
+
 public class LoginManage {
 
 	User loginUser;

@@ -1,8 +1,9 @@
+package login;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.BorderLayout;
-package login;
 
 /**
  * The login class builds the GUI with the necessary elements. If the user enters
