@@ -17,6 +17,7 @@ public class SignupManage {
 	 * Adds a new user account object containing username and password to the ArrayList users
 	 * @param username
 	 * @param password
+	 * @author Jasmine Jess
 	 */
 	public int addNewUser(String username, String password) {
 		//if username is already in use, return 1
@@ -35,6 +36,7 @@ public class SignupManage {
 	 * Checks to see if the username is already in use
 	 * @param username
 	 * @return true if username is already in use
+	 * @author Jasmine Jess
 	 */
 	public boolean isValidUsername(String username) {
 		for(int i = 0; i < users.size(); i++) {
@@ -53,6 +55,7 @@ public class SignupManage {
 	 * Also requires and compares password confirmation to avoid typos.
 	 * @param password
 	 * @return true if password meets criteria
+	 * @author Jasmine Jess
 	 */
 	public boolean isValidPassword(String password) {
 		//initializing variables needed to check if password is valid

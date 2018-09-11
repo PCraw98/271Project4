@@ -6,10 +6,19 @@ import signup.User;
 public class UserTest extends TestCase{
 	private User testUser;
 	
+	/**
+	 * Sets up test cases
+	 * @author Jasmine Jess
+	 */
 	protected void setUp() throws Exception {
 		super.setUp();
 		testUser = new User("testuser1", "TestPass123");
 	}
+	
+	/**
+	 * Tests that valid user was created
+	 * @author Jasmine Jess
+	 */
 	public void testValidAccount() {
 		assertNotNull(testUser);
 		assertTrue(testUser.doesUserExist("testuser1"));
