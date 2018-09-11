@@ -11,20 +11,29 @@ import java.awt.BorderLayout;
 package login;
 
 public class Login extends JFrame {
+	private Font font = new java.awt.Font("Dialog", 0, 13);
+
+	public static void main (String[] args) {
+		JFrame frame = new JFrame("Login Screen");
+		frame.setVisible(True);
+	}
 	
-	JFrame frame = new JFrame("Login Screen");
+	public Login(String title) {
+		super(title);
+		setBounds(300,300,300,200);
+
+		
+	}
 	//exits JFrame operations when the window is closed
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	frame.setPreferredSize(new Dimension(250,150));
-	frame.pack();
-	frame.setVisible(True);
+
 	/**
 	 * 
 	 */
 	private JPanel mainPanel() {
 		//initializes a new panel object called panel
 		JPanel panel = new JPanel();
-		panel.setLayout(Grid);
+		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		//use JPasswordField to use dots instead of text
 		
 	}
