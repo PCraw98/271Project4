@@ -15,7 +15,7 @@ public class SignupTest extends TestCase{
 	
 	public void testValidAccount() {
 		assertNotNull(signupManager);
-		assertTrue(signupManager.usernameExists("testuser"));
+		assertTrue(signupManager.isValidUsername("testuser"));
 		assertTrue(signupManager.isValidPassword("Newpassword123"));
 	}
 	
@@ -31,7 +31,7 @@ public class SignupTest extends TestCase{
 	}
 	
 	public void testInvalidUsername() {
-		assertFalse(signupManager.usernameExists("invaliduser"));
+		assertFalse(signupManager.isValidUsername("invaliduser"));
 	}
 	
 	public void testInvalidPassword() {
@@ -41,13 +41,7 @@ public class SignupTest extends TestCase{
 	public void testAddValidUsers() {
 		assertEquals(0, signupManager.addNewUser("abcuser", "Test1234"));
 		assertEquals(0, signupManager.addNewUser("xyzuser", "321Tests"));
-		assertTrue(signupManager.usernameExists("abcuser"));
-		assertTrue(signupManager.usernameExists("xyzuser"));
-		assertTrue(signupManager.isValidPassword("Test1234"));
-		assertTrue(signupManager.isValidPassword("321Tests"));	
-	}
-	
-	public void tearDown() {
-		
+		assertTrue(signupManager.isValidUsername("abcuser"));
+		assertTrue(signupManager.isValidUsername("xyzuser"));
 	}
 }

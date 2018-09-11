@@ -1,7 +1,6 @@
 package signup;
 
 import java.util.ArrayList;
-import login.LoginManage;
 
 public class SignupManage {
 	
@@ -21,7 +20,7 @@ public class SignupManage {
 	 */
 	public int addNewUser(String username, String password) {
 		//if username is already in use, return 1
-		if(usernameExists(username)) {
+		if(isValidUsername(username)) {
 			return 1;
 		} else if(!isValidPassword(password)) {
 			//if password is not valid, return 2
@@ -37,7 +36,7 @@ public class SignupManage {
 	 * @param username
 	 * @return true if username is already in use
 	 */
-	public boolean usernameExists(String username) {
+	public boolean isValidUsername(String username) {
 		for(int i = 0; i < users.size(); i++) {
 			User currUser = users.get(i);
 			if(currUser.doesUserExist(username)) {
@@ -83,6 +82,5 @@ public class SignupManage {
 			}
 		}
 		return false;
-	}
-	
+	}	
 }

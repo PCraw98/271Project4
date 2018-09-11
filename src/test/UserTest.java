@@ -14,6 +14,8 @@ public class UserTest extends TestCase{
 		assertNotNull(testUser);
 		assertTrue(testUser.doesUserExist("testuser1"));
 		assertTrue(testUser.checkCredentials("testuser1", "TestPass123"));
-		
+		assertFalse(testUser.checkCredentials("testuser1", "badpass"));
+		assertFalse(testUser.checkCredentials("testuser", "TestPass123"));
 	}
+	
 }
