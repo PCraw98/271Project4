@@ -9,7 +9,6 @@ import java.awt.event.*;
 import java.awt.BorderLayout;
 
 package login;
->>>>>>> 28f0861909ec9541df405c4f14eef376936cf631
 
 public class Login extends JFrame {
 	
