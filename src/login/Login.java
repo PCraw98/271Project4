@@ -136,11 +136,14 @@ public class Login extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			LoginManage manager = new LoginManage();
-			boolean check = manager.isValidAccount(usernameTextField.getText(), String.valueOf(passwordTextField.getPassword()));
-			if (check == false) {
+			int check = manager.isValidAccount(usernameTextField.getText(), String.valueOf(passwordTextField.getPassword()));
+			if (check == 1) {
 				responseLabel.setForeground(Color.RED);
-				responseLabel.setText("Username or Password was incorrect");
-			} else if (check == true) {
+				responseLabel.setText("Username does not match an account");
+			} else if (check == 2) {
+				responseLabel.setForeground(Color.RED);
+				responseLabel.setText("Password is incorrect for entered username");
+			} else if (check == 0) {
 				responseLabel.setForeground(Color.GREEN);
 				responseLabel.setText("Login successful");
 			}
