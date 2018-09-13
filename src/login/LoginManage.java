@@ -1,5 +1,6 @@
 package login;
 
+import signup.SignupManage;
 import signup.User;
 
 /**
@@ -10,7 +11,7 @@ import signup.User;
 
 public class LoginManage {
 
-	User loginUser;
+	SignupManage manager = new SignupManage();
 	
 	/**
 	 * Checks username and password to see if they constitute a 
@@ -22,8 +23,7 @@ public class LoginManage {
 	 * @author Jasmine Jess
 	 */
 	public boolean isValidAccount(String username, String password) {
-		loginUser = new User(username, password);
-		if(loginUser.checkCredentials(username, password)) {
+		if(manager.addNewUser(username, password) == 0) {
 			return true;
 		}
 		return false;

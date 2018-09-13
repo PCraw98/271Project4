@@ -38,7 +38,7 @@ public class LoginTest extends TestCase {
 	 * Test for unsuccessful login when given an invalid username or password
 	 */
 	public void testInvalidAccount() {
-		assertFalse(loginManager.isValidAccount("testuser", "invalidpassword"));
-		assertFalse(loginManager.isValidAccount("badusername", "Newpassword123"));
+		assertFalse(loginManager.isValidAccount("BADUSER", "randompass"));
+		assertFalse(loginManager.isValidAccount("testuser", "badpass"));
 	}
 }
