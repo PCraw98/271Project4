@@ -1,5 +1,3 @@
-package signup;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -130,7 +128,6 @@ public class Signup extends JFrame {
 			add(responseLabel);
 			add(responseLabel1);
 		}
-		
 	}
 	
 	/**
@@ -140,7 +137,6 @@ public class Signup extends JFrame {
 	 * @author Elijah Rogers
 	 */
 	private class ButtonListener implements ActionListener {
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			SignupManage manager = new SignupManage();
@@ -148,6 +144,7 @@ public class Signup extends JFrame {
 			if (check == 1) {
 				responseLabel.setForeground(Color.RED);
 				responseLabel.setText("Username is already in use.");
+				responseLabel1.setText("");
 			} else if (check == 2) {
 				responseLabel.setForeground(Color.RED);
 				responseLabel.setText("Password is invalid. Must be at least eight characters, with");
@@ -156,9 +153,9 @@ public class Signup extends JFrame {
 			} else if (check == 0) {
 				responseLabel.setForeground(Color.BLUE);
 				responseLabel.setText("User successfully added");
+				responseLabel1.setText("");
 			}
 		}
-		
 	}
 	
 	/**
