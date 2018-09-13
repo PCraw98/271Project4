@@ -11,6 +11,11 @@ public class SignupManage {
 	 */
 	public SignupManage() {
 		users = new ArrayList<User>();
+		initAdminAcc();
+	}
+	
+	public void initAdminAcc() {
+		users.add(new User("admin", "Password123"));
 	}
 	
 	/**
