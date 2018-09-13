@@ -30,9 +30,9 @@ public class Login extends JFrame{
 	 */
 	public Login(String title) {
 		super(title);
-		setBounds(300,300,300,200);
+		setBounds(300,300,600,400);
 		//exits JFrame operations when the window is closed
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//***********************************||Creates Main Panel||***********************************
 		usrnmLabel = new JLabel();
 		usrnmLabel.setFont(font);
@@ -59,7 +59,7 @@ public class Login extends JFrame{
 		psswrdTextField.setText("");
 		//*************************||Create Panels and add to Content Pane||**************************
 		usrnmPanel = new UsernamePanel();
-		psswrdLabel = new PasswordPanel();
+		psswrdPanel = new PasswordPanel();
 		mainPanel = new MainPanel();
 		getContentPane().add(mainPanel, BorderLayout.CENTER);
 	}
@@ -129,7 +129,7 @@ public class Login extends JFrame{
 			if (check == false) {
 				responseLabel.setForeground(Color.RED);
 				responseLabel.setText("Username or Password was incorrect");
-			} else if (check == True) {
+			} else if (check == true) {
 				responseLabel.setForeground(Color.GREEN);
 				responseLabel.setText("Login successful");
 			}
@@ -142,6 +142,6 @@ public class Login extends JFrame{
 	 */
 	public static void main (String[] args) {
 		JFrame frame = new JFrame("Login Screen");
-		frame.setVisible(True);
+		frame.setVisible(true);
 	}
 }
