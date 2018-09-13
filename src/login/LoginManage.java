@@ -8,6 +8,8 @@ import signup.User;
 /**
  * Checks for valid login credentials
  * 
+ * Test account username is "testuser", password is "Password123"
+ * 
  * @author Jasmine Jess
  */
 
@@ -17,14 +19,6 @@ public class LoginManage {
 
 	public LoginManage() {
 		manager = new SignupManage();
-		initAdminAcc();
-	}
-	
-	/**
-	 * Initializes an admin account to test against
-	 */
-	public void initAdminAcc() {
-		manager.addNewUser("admin", "Password123");
 	}
 	
 	/**
