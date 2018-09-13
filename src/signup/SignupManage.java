@@ -26,7 +26,7 @@ public class SignupManage {
 	 */
 	public int addNewUser(String username, String password) {
 		//if username is already in use, return 1
-		if(isValidUsername(username)) {
+		if(isUsernameInUse(username)) {
 			return 1;
 		} else if(!isValidPassword(password)) {
 			//if password is not valid, return 2
@@ -43,7 +43,7 @@ public class SignupManage {
 	 * @return true if username is already in use
 	 * @author Jasmine Jess
 	 */
-	public boolean isValidUsername(String username) {
+	public boolean isUsernameInUse(String username) {
 		for(int i = 0; i < users.size(); i++) {
 			User currUser = users.get(i);
 			if(currUser.doesUserExist(username)) {

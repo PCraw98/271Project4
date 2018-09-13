@@ -31,14 +31,13 @@ public class LoginTest extends TestCase {
 	 */
 	public void testValidAccount() {
 		assertNotNull(signupManager);
-		assertTrue(loginManager.isValidAccount("testuser", "Newpassword123"));
+		assertEquals(0, loginManager.isValidAccount("testuser", "Newpassword123"));
 	}
 	
 	/**
 	 * Test for unsuccessful login when given an invalid username or password
 	 */
 	public void testInvalidAccount() {
-		assertFalse(loginManager.isValidAccount("BADUSER", "randompass"));
-		assertFalse(loginManager.isValidAccount("testuser", "badpass"));
+		assertEquals(2, loginManager.isValidAccount("testuser", "badpass"));
 	}
 }

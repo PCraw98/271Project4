@@ -29,7 +29,8 @@ public class SignupTest extends TestCase{
 	 */
 	public void testValidAccount() {
 		assertNotNull(signupManager);
-		assertTrue(signupManager.isValidUsername("testuser"));
+		assertTrue(signupManager.isUsernameInUse("admin"));
+		assertTrue(signupManager.isUsernameInUse("testuser"));
 		assertTrue(signupManager.isValidPassword("Newpassword123"));
 	}
 	
@@ -39,6 +40,7 @@ public class SignupTest extends TestCase{
 	 */
 	public void testCreateAccountInvalidUsername() {
 		assertEquals(1, signupManager.addNewUser("testuser", "Newpassword123"));
+		assertEquals(1, signupManager.addNewUser("admin", "Password123"));
 	}
 	
 	/**
@@ -55,7 +57,7 @@ public class SignupTest extends TestCase{
 	 * Tests to make sure isValidUsername works as expected
 	 */
 	public void testInvalidUsername() {
-		assertFalse(signupManager.isValidUsername("invaliduser"));
+		assertFalse(signupManager.isUsernameInUse("invaliduser"));
 	}
 	
 	/**
@@ -72,7 +74,7 @@ public class SignupTest extends TestCase{
 	public void testAddValidUsers() {
 		assertEquals(0, signupManager.addNewUser("abcuser", "Test1234"));
 		assertEquals(0, signupManager.addNewUser("xyzuser", "321Tests"));
-		assertTrue(signupManager.isValidUsername("abcuser"));
-		assertTrue(signupManager.isValidUsername("xyzuser"));
+		assertTrue(signupManager.isUsernameInUse("abcuser"));
+		assertTrue(signupManager.isUsernameInUse("xyzuser"));
 	}
 }
