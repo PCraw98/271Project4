@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 /**
  * The Login class creates the GUI to be used as the main login page for the application
  * If the values entered into the login and password fields match an existing login, the user
- * is "logged in" (which means very little at the moment). Interfaces with the LoginManage.
+ * is told that their information matches a valid account. interfaces with LoginManage
  * @author Parker Crawford
  */
 public class Login extends JFrame {
