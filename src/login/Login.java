@@ -53,9 +53,9 @@ public class Login extends JFrame{
 		loginButton.addActionListener(listener);
 		signupButton.addActionListener(listener);
 		//*******************************||Initialize the text fields||*******************************
-		usrnmTextField.setMaximumSize(new Dimension(150, usrnmTextField.getPreferredSize().height));
+		usrnmTextField.setMaximumSize(new Dimension(350, usrnmTextField.getPreferredSize().height));
 		usrnmTextField.setText("");
-		psswrdTextField.setMaximumSize(new Dimension(150, psswrdTextField.getPreferredSize().height));
+		psswrdTextField.setMaximumSize(new Dimension(350, psswrdTextField.getPreferredSize().height));
 		psswrdTextField.setText("");
 		//*************************||Create Panels and add to Content Pane||**************************
 		usrnmPanel = new UsernamePanel();
