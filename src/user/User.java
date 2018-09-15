@@ -1,4 +1,12 @@
-package signup;
+package user;
+
+/**
+ * Sets up the constructor and methods for the User class, which contains
+ * a username and password. Each account is a User object.
+ * 
+ * @author Jasmine Jess
+ *
+ */
 
 public class User {
 	private String username;
@@ -13,8 +21,6 @@ public class User {
 	 * Checks if user already exists
 	 * @param username
 	 * @return true if user already exists
-	 * 
-	 * @author Jasmine Jess
 	 */
 	public boolean doesUserExist(String username) {
 		if(username.equals(this.username)) {
@@ -27,8 +33,6 @@ public class User {
 	 * Checks if password is correct for user
 	 * @param password
 	 * @return true if matches
-	 * 
-	 * @author Jasmine Jess
 	 */
 	public boolean isPasswordCorrect(String password) {
 		if(password.equals(this.password)) {
@@ -42,8 +46,6 @@ public class User {
 	 * @param username
 	 * @param password
 	 * @return true if valid
-	 * 
-	 * @author Jasmine Jess
 	 */
 	public boolean checkCredentials(String username, String password) {
 		if(doesUserExist(username) && isPasswordCorrect(password)) {

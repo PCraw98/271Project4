@@ -1,24 +1,23 @@
 package login;
 
-import java.util.ArrayList;
-
-import signup.SignupManage;
-import signup.User;
+import user.UserManage;
 
 /**
  * Checks for valid login credentials
  * 
- * Test account username is "testuser", password is "Password123"
+ * Test account username is "admin", password is "Password123"
  * 
  * @author Jasmine Jess
  */
 
 public class LoginManage {
 
-	SignupManage manager;
+	UserManage manager;
 
 	public LoginManage() {
-		manager = new SignupManage();
+		manager = new UserManage();
+		manager.addNewUser("admin", "Testpass123");
+		
 	}
 	
 	/**
@@ -26,16 +25,12 @@ public class LoginManage {
 	 * valid account
 	 * @param username
 	 * @param password
-	 * @return true if login is successful
+	 * @return 0 if login is successful, 1 if username does not exist, 
+	 * 	2 if password is invalid
 	 * 
 	 * @author Jasmine Jess
 	 */
-	public int isValidAccount(String username, String password) {
-		 if(manager.addNewUser(username, password) == 1) {
-			return 1;
-		} else if(manager.addNewUser(username, password) == 2) {
-			return 2;
-		}
-		return 0;
+	public int isValidCreds(String username, String password) {
+		 return manager.isValidAccount(username, password);
 	}
 }

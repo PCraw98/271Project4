@@ -1,7 +1,13 @@
 package test;
 
 import junit.framework.*;
-import signup.User;
+import user.User;
+
+/**
+ * Tests all important functionality of the User class
+ * @author Jasmine
+ *
+ */
 
 public class UserTest extends TestCase{
 	private User testUser;

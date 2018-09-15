@@ -11,6 +11,12 @@ import junit.framework.TestCase;
 
 import signup.SignupManage;
 
+/**
+ * Tests all important functionality required to sign up for a new account
+ * @author Jasmine JEss
+ *
+ */
+
 public class SignupTest extends TestCase{
 
 	private SignupManage signupManager;
@@ -21,17 +27,15 @@ public class SignupTest extends TestCase{
 	public void setUp() throws Exception {
 		super.setUp();
 		signupManager = new SignupManage();
-		signupManager.addNewUser("testuser", "Newpassword123");
+		signupManager.addNewAccount("testuser", "Newpassword123");
 	}
 	
 	/**
 	 * Test for successful account creation
 	 */
-	public void testValidAccount() {
+	public void testCreateValidAccount() {
 		assertNotNull(signupManager);
-		assertTrue(signupManager.isUsernameInUse("admin"));
-		assertTrue(signupManager.isUsernameInUse("testuser"));
-		assertTrue(signupManager.isValidPassword("Newpassword123"));
+		assertEquals(0, signupManager.addNewAccount("admin", "Testpass123"));
 	}
 	
 	/**
@@ -39,32 +43,17 @@ public class SignupTest extends TestCase{
 	 * that is already in use
 	 */
 	public void testCreateAccountInvalidUsername() {
-		assertEquals(1, signupManager.addNewUser("testuser", "Newpassword123"));
-		assertEquals(1, signupManager.addNewUser("admin", "Password123"));
+		assertEquals(1, signupManager.addNewAccount("testuser", "Newpassword123"));
 	}
 	
 	/**
 	 * Test for unsuccessful account creation when given invalid password
 	 */
 	public void testCreateAccountInvalidPassword() {
-		assertEquals(2, signupManager.addNewUser("test123user", "nocaps1"));
-		assertEquals(2, signupManager.addNewUser("test123user", "NoNumbers"));
-		assertEquals(2, signupManager.addNewUser("test123user", "NOLOWERCASE"));
-		assertEquals(2, signupManager.addNewUser("test123user", "Short1"));
-	}
-	
-	/**
-	 * Tests to make sure isValidUsername works as expected
-	 */
-	public void testInvalidUsername() {
-		assertFalse(signupManager.isUsernameInUse("invaliduser"));
-	}
-	
-	/**
-	 * Test to check if potential password meets criteria
-	 */
-	public void testInvalidPassword() {
-		assertFalse(signupManager.isValidPassword("invalidpass"));
+		assertEquals(2, signupManager.addNewAccount("testuser1", "nocaps1"));
+		assertEquals(2, signupManager.addNewAccount("testuser1", "NoNumbers"));
+		assertEquals(2, signupManager.addNewAccount("testuser1", "NOLOWERCASE"));
+		assertEquals(2, signupManager.addNewAccount("testuser1", "Short1"));
 	}
 	
 	/**
@@ -72,9 +61,7 @@ public class SignupTest extends TestCase{
 	 * store user accounts
 	 */
 	public void testAddValidUsers() {
-		assertEquals(0, signupManager.addNewUser("abcuser", "Test1234"));
-		assertEquals(0, signupManager.addNewUser("xyzuser", "321Tests"));
-		assertTrue(signupManager.isUsernameInUse("abcuser"));
-		assertTrue(signupManager.isUsernameInUse("xyzuser"));
+		assertEquals(0, signupManager.addNewAccount("abcuser", "Test1234"));
+		assertEquals(0, signupManager.addNewAccount("xyzuser", "321Tests"));
 	}
 }

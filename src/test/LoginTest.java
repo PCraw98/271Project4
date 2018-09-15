@@ -2,7 +2,6 @@ package test;
 
 import junit.framework.TestCase;
 import login.LoginManage;
-import signup.SignupManage;
 
 /**
  * Tests methods within LoginManage and possible cases that may be faced 
@@ -13,31 +12,28 @@ import signup.SignupManage;
 
 public class LoginTest extends TestCase {
 
-	private SignupManage signupManager;
-	private LoginManage loginManager;
+	private LoginManage login;
 	
 	/**
 	 * Set up test cases 
 	 */
 	public void setUp() throws Exception {
 		super.setUp();
-		signupManager = new SignupManage();
-		loginManager = new LoginManage();
-		signupManager.addNewUser("testuser", "Newpassword123");
+		login = new LoginManage();
 	}
 	
 	/**
 	 * Tests for successful login when given a valid account
 	 */
 	public void testValidAccount() {
-		assertNotNull(signupManager);
-		assertEquals(0, loginManager.isValidAccount("testuser", "Newpassword123"));
+		assertEquals(0, login.isValidCreds("admin", "Testpass123"));
 	}
 	
 	/**
 	 * Test for unsuccessful login when given an invalid username or password
 	 */
 	public void testInvalidAccount() {
-		assertEquals(2, loginManager.isValidAccount("testuser", "badpass"));
+		assertEquals(1, login.isValidCreds("notadmin", "Testpass123")); //user does not exist
+		assertEquals(2, login.isValidCreds("admin", "badpass")); //incorrect password
 	}
 }
