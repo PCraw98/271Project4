@@ -34,6 +34,7 @@ public class Login extends JFrame {
 	private Font font = new java.awt.Font("Dialog", 0, 13);
 	private UsernamePanel usernamePanel;
 	private PasswordPanel passwordPanel;
+	private ButtonPanel buttonPanel;
 	private MainPanel mainPanel;
 	
 	/**
@@ -42,7 +43,7 @@ public class Login extends JFrame {
 	 */
 	public Login(String title) {
 		super(title);
-		setBounds(300,300,400,350);
+		setBounds(300,300,500,250);
 		
 		//*************************************\/\Main JLabels/\/***************************************
 		usernameLabel = new JLabel();
@@ -75,6 +76,7 @@ public class Login extends JFrame {
 		//*************************\/\Create Panels and add to Content Pane/\/**************************
 		usernamePanel = new UsernamePanel();
 		passwordPanel = new PasswordPanel();
+		buttonPanel = new ButtonPanel();
 		mainPanel = new MainPanel();
 		getContentPane().add(mainPanel, BorderLayout.CENTER);
 	}
@@ -106,6 +108,20 @@ public class Login extends JFrame {
 	}
 	
 	/**
+	 * Creates the button panel to be added to the GUI
+	 * @author Parker Crawford
+	 */
+	private class ButtonPanel extends JPanel {
+		public ButtonPanel() {
+			setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+			add(Box.createRigidArea(new Dimension(30,0)));
+			add(loginButton);
+			add(Box.createRigidArea(new Dimension(30,0)));
+			add(signupButton);
+		}
+	}
+	
+	/**
 	 * Makes the main panel and adds all of the GUI elements to it.
 	 * @author Parker Crawford
 	 */
@@ -117,9 +133,7 @@ public class Login extends JFrame {
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(passwordPanel);
 			add(Box.createRigidArea(new Dimension(0, 30)));
-			add(loginButton);
-			add(Box.createRigidArea(new Dimension(0, 30)));
-			add(signupButton);
+			add(buttonPanel);
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(responseLabel);
 		}
