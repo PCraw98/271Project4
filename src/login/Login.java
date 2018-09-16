@@ -1,5 +1,3 @@
-package login;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -23,6 +21,7 @@ import javax.swing.JTextField;
  * is told that their information matches a valid account. interfaces with LoginManage
  * @author Parker Crawford
  */
+@SuppressWarnings("serial")
 public class Login extends JFrame {
 	
 	//***********************\\Instance Variables//***********************
@@ -37,13 +36,17 @@ public class Login extends JFrame {
 	private ButtonPanel buttonPanel;
 	private MainPanel mainPanel;
 	
+	private JButton passwordButton;
+	private JButton usernameButton;
+	private ButtonPanel1 buttonPanel1;
+	
 	/**
 	 * Builds each element of the GUI to be and sets the bounds, labels, and text.
 	 * @param title
 	 */
 	public Login(String title) {
 		super(title);
-		setBounds(300,300,500,250);
+		setBounds(300,300,500,350);
 		
 		//*************************************\/\Main JLabels/\/***************************************
 		usernameLabel = new JLabel();
@@ -65,13 +68,31 @@ public class Login extends JFrame {
 		signupButton.setText("New User? Sign Up");
 		ButtonListener listener = new ButtonListener();
 		loginButton.addActionListener(listener);
-		signupButton.addActionListener(listener);
+//		signupButton.addActionListener(listener);
 		
 		//*******************************\/\Initialize the text fields/\/*******************************
 		usernameTextField.setMaximumSize(new Dimension(350, usernameTextField.getPreferredSize().height));
 		usernameTextField.setText("");
 		passwordTextField.setMaximumSize(new Dimension(350, passwordTextField.getPreferredSize().height));
 		passwordTextField.setText("");
+		
+		
+		usernameButton = new JButton();
+		usernameButton.setFont(font);
+		usernameButton.setText("Forgot Username");
+		UsernameListener usernameListener = new UsernameListener();
+		usernameButton.addActionListener(usernameListener);
+		
+		passwordButton = new JButton();
+		passwordButton.setFont(font);
+		passwordButton.setText("Forgot Password");
+		PasswordListener passwordListener = new PasswordListener();
+		passwordButton.addActionListener(passwordListener);
+		
+		buttonPanel1 = new ButtonPanel1();
+		
+		SignupListener signupListener = new SignupListener();
+		signupButton.addActionListener(signupListener);
 		
 		//*************************\/\Create Panels and add to Content Pane/\/**************************
 		usernamePanel = new UsernamePanel();
@@ -122,6 +143,19 @@ public class Login extends JFrame {
 	}
 	
 	/**
+	 * 
+	 * @author Elijah Rogers
+	 */
+	private class ButtonPanel1 extends JPanel {
+		public ButtonPanel1() {
+			setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+			add(usernameButton);
+			add(Box.createRigidArea(new Dimension(30,0)));
+			add(passwordButton);
+		}
+	}
+	
+	/**
 	 * Makes the main panel and adds all of the GUI elements to it.
 	 * @author Parker Crawford
 	 */
@@ -134,6 +168,8 @@ public class Login extends JFrame {
 			add(passwordPanel);
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(buttonPanel);
+			add(Box.createRigidArea(new Dimension(0, 30)));
+			add(buttonPanel1);
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(responseLabel);
 		}
@@ -162,7 +198,47 @@ public class Login extends JFrame {
 				responseLabel.setText("Login successful");
 			}
 		}
-		
+	}
+	
+	/**
+	 * 
+	 * @author Elijah Rogers
+	 */
+	private class UsernameListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JFrame frame = new ForgotUsername("Forgot Username");
+			frame.setResizable(false);
+			frame.setVisible(true);
+		}
+	}
+	
+	/**
+	 * 
+	 * @author Elijah Rogers
+	 */
+	private class PasswordListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JFrame frame = new ForgotPassword("Forgot Password");
+			frame.setResizable(false);
+			frame.setVisible(true);
+			dispose();
+		}
+	}
+	
+	/**
+	 * 
+	 * @author Elijah Rogers
+	 */
+	private class SignupListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JFrame frame = new Signup("Sign Up");
+			frame.setResizable(false);
+			frame.setVisible(true);
+			dispose();
+		}
 	}
 	
 	/**
@@ -171,6 +247,7 @@ public class Login extends JFrame {
 	 */
 	public static void main(String[] args) {
 		JFrame frame = new Login("Login Screen");
+		frame.setResizable(false);
 		frame.setVisible(true);
 	}
 }
