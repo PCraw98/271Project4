@@ -15,12 +15,16 @@ import java.util.ArrayList;
 
 public class UserManage {
 
-	private ArrayList<User> users;
+	private static ArrayList<User> users;
 	private String currUserLoggedIn;
 	
 	public UserManage() {
 		users = new ArrayList<User>();
 		addNewUser("admin", "Password123");
+	}
+	
+	public static ArrayList<User> getUsers() {
+		return users;
 	}
 	
 	/**

@@ -1,5 +1,7 @@
 package login;
 
+import java.util.ArrayList;
+import user.User;
 import user.UserManage;
 
 /**
@@ -10,23 +12,30 @@ import user.UserManage;
 
 public class LoginManage {
 
-	UserManage manager;
+	private ArrayList<User> allUsers;
 
 	public LoginManage() {
-		manager = new UserManage();
-	}
-	
+		allUsers = UserManage.getUsers();
+	}	
+
 	/**
-	 * Checks username and password to see if they constitute a 
-	 * valid account
+	 * Checks for valid username and password combination. If both items 
+	 * constitute a valid user, "login" occurs
 	 * @param username
 	 * @param password
-	 * @return 0 if login is successful, 1 if username does not exist, 
-	 * 	2 if password is invalid
-	 * 
-	 * @author Jasmine Jess
+	 * @return 0 if login is successful, 1 if username is nonexistent, 
+	 * 	2 if password is incorrect
 	 */
 	public int isValidCreds(String username, String password) {
-		 return manager.isValidAccount(username, password);
+		for(int i = 0; i < allUsers.size(); i++) {
+			User currUser = allUsers.get(i);
+			if(currUser.doesUserExist(username) && currUser.isPasswordCorrect(password)) {
+				//setUsername(username);
+				return 0;
+			} else if(currUser.doesUserExist(username) && !currUser.isPasswordCorrect(password)) {
+				return 2;
+			} 
+		} 
+		return 1;
 	}
 }
