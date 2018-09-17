@@ -16,8 +16,6 @@ public class LoginManage {
 
 	public LoginManage() {
 		manager = new UserManage();
-		manager.addNewUser("admin", "Testpass123");
-		
 	}
 	
 	/**

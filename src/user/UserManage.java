@@ -18,6 +18,7 @@ public class UserManage {
 	
 	public UserManage() {
 		users = new ArrayList<User>();
+		addNewUser("admin", "Password123");
 	}
 	
 	/**
