@@ -1,3 +1,5 @@
+package login;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -13,6 +15,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import signup.Signup;
+import user.ForgotPassword;
+import user.ForgotUsername;
 
 
 /**
@@ -186,7 +192,7 @@ public class Login extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			LoginManage manager = new LoginManage();
-			int check = manager.isValidAccount(usernameTextField.getText(), String.valueOf(passwordTextField.getPassword()));
+			int check = manager.isValidCreds(usernameTextField.getText(), String.valueOf(passwordTextField.getPassword()));
 			if (check == 1) {
 				responseLabel.setForeground(Color.RED);
 				responseLabel.setText("Username does not match an account");
