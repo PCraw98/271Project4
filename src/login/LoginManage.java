@@ -30,7 +30,7 @@ public class LoginManage {
 		for(int i = 0; i < allUsers.size(); i++) {
 			User currUser = allUsers.get(i);
 			if(currUser.doesUserExist(username) && currUser.isPasswordCorrect(password)) {
-				//setUsername(username);
+				UserManage.setUsername(username);
 				return 0;
 			} else if(currUser.doesUserExist(username) && !currUser.isPasswordCorrect(password)) {
 				return 2;
@@ -38,4 +38,5 @@ public class LoginManage {
 		} 
 		return 1;
 	}
+	
 }

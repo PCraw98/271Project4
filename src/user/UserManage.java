@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class UserManage {
 
 	private static ArrayList<User> users;
-	private String currUserLoggedIn;
+	private static String currUserLoggedIn;
 	
 	public UserManage() {
 		users = new ArrayList<User>();
@@ -99,31 +99,10 @@ public class UserManage {
 	}	
 	
 	/**
-	 * Checks for valid username and password combination. If both items 
-	 * constitute a valid user, "login" occurs
-	 * @param username
-	 * @param password
-	 * @return 0 if login is successful, 1 if username is nonexistent, 
-	 * 	2 if password is incorrect
-	 */
-	public int isValidAccount(String username, String password) {
-		for(int i = 0; i < users.size(); i++) {
-			User currUser = users.get(i);
-			if(currUser.doesUserExist(username) && currUser.isPasswordCorrect(password)) {
-				setUsername(username);
-				return 0;
-			} else if(currUser.doesUserExist(username) && !currUser.isPasswordCorrect(password)) {
-				return 2;
-			} 
-		} 
-		return 1;
-	}
-	
-	/**
 	 * Sets currUser as the user who is currently logged in
 	 * @param user
 	 */
-	public void setUsername(String user) {
+	public static void setUsername(String user) {
 		currUserLoggedIn = user;
 	}
 
@@ -131,14 +110,14 @@ public class UserManage {
 	 * Returns the username of the user currently logged in
 	 * @return currUser
 	 */
-	public String getUsername() {
+	public static String getUsername() {
 		return currUserLoggedIn;
 	}
 	
 	/**
 	 * Deletes account from the arrayList
 	 */
-	public void deleteAccount() {
+	public static void deleteAccount() {
 		for(int i = 0; i < users.size(); i++) {
 			User currUser = users.get(i);
 			if(currUser.equals(currUserLoggedIn)) {

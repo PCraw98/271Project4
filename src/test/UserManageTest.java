@@ -48,14 +48,4 @@ public class UserManageTest extends TestCase{
 		assertFalse(testUsers.isValidPassword("Short1"));
 	}
 	
-	/**
-	 * Tests the isValid account method
-	 */
-	public void isValidAccount() {
-		//return 0 for successful login, 1 for nonexistent username, 2 for invalid password
-		assertEquals(0, testUsers.isValidAccount("testaccount1", "Testpass123"));
-		assertEquals(1, testUsers.isValidAccount("testaccount1", "Testpass")); 
-		assertEquals(2, testUsers.isValidAccount("userinvalid", "Testpass123"));
-	}
-	
 }
