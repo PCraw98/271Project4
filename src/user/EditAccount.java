@@ -1,3 +1,5 @@
+package user;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -9,6 +11,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import login.Login;
 
 /**
  * The Signup class creates a GUI for the signup page. When the values entered
