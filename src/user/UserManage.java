@@ -37,6 +37,7 @@ public class UserManage {
 			return 2; //if password is does not meet criteria, return 1
 		}else
 			users.add(new User(username, password));
+			setUsername(username);
 			return 0; //return 0 if user is successfully added
 	}
 

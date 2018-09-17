@@ -1,3 +1,5 @@
+package login;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -13,6 +15,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import signup.Signup;
+import user.EditAccount;
+import user.ForgotPassword;
+import user.ForgotUsername;
 
 
 /**

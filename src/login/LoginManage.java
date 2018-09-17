@@ -5,8 +5,6 @@ import user.UserManage;
 /**
  * Checks for valid login credentials
  * 
- * Test account username is "admin", password is "Password123"
- * 
  * @author Jasmine Jess
  */
 
