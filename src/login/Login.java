@@ -1,5 +1,3 @@
-package login;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,10 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
-import signup.Signup;
-import user.ForgotPassword;
-import user.ForgotUsername;
 
 
 /**
@@ -200,8 +194,10 @@ public class Login extends JFrame {
 				responseLabel.setForeground(Color.RED);
 				responseLabel.setText("Password is incorrect for entered username");
 			} else if (check == 0) {
-				responseLabel.setForeground(Color.GREEN);
-				responseLabel.setText("Login successful");
+				JFrame frame = new EditAccount("Edit Account");
+				frame.setResizable(false);
+				frame.setVisible(true);
+				dispose();
 			}
 		}
 	}
