@@ -1,3 +1,5 @@
+package signup;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -140,7 +142,7 @@ public class Signup extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			SignupManage manager = new SignupManage();
-			int check = manager.addNewUser(usrnmTextField.getText(), String.valueOf(psswrdTextField.getPassword()));
+			int check = manager.addNewAccount(usrnmTextField.getText(), String.valueOf(psswrdTextField.getPassword()));
 			if (check == 1) {
 				responseLabel.setForeground(Color.RED);
 				responseLabel.setText("Username is already in use.");
