@@ -8,13 +8,15 @@ import java.util.ArrayList;
  * check if passwords meet criteria, and check if username/password combos 
  * constitute valid accounts.
  * 
+ * Test account username is "admin", password is "Password123"
+ * 
  * @author Jasmine Jess
- *
  */
 
 public class UserManage {
 
 	private ArrayList<User> users;
+	private String currUserLoggedIn;
 	
 	public UserManage() {
 		users = new ArrayList<User>();
@@ -103,6 +105,7 @@ public class UserManage {
 		for(int i = 0; i < users.size(); i++) {
 			User currUser = users.get(i);
 			if(currUser.doesUserExist(username) && currUser.isPasswordCorrect(password)) {
+				setUsername(username);
 				return 0;
 			} else if(currUser.doesUserExist(username) && !currUser.isPasswordCorrect(password)) {
 				return 2;
@@ -110,6 +113,33 @@ public class UserManage {
 		} 
 		return 1;
 	}
+	
+	/**
+	 * Sets currUser as the user who is currently logged in
+	 * @param user
+	 */
+	public void setUsername(String user) {
+		currUserLoggedIn = user;
+	}
 
+	/**
+	 * Returns the username of the user currently logged in
+	 * @return currUser
+	 */
+	public String getUsername() {
+		return currUserLoggedIn;
+	}
+	
+	/**
+	 * Deletes account from the arrayList
+	 */
+	public void deleteAccount() {
+		for(int i = 0; i < users.size(); i++) {
+			User currUser = users.get(i);
+			if(currUser.equals(currUserLoggedIn)) {
+				users.remove(currUser);
+			} 
+		} 
+	}
 	
 }
