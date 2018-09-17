@@ -1,5 +1,3 @@
-package login;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -70,7 +68,6 @@ public class Login extends JFrame {
 		signupButton.setText("New User? Sign Up");
 		ButtonListener listener = new ButtonListener();
 		loginButton.addActionListener(listener);
-//		signupButton.addActionListener(listener);
 		
 		//*******************************\/\Initialize the text fields/\/*******************************
 		usernameTextField.setMaximumSize(new Dimension(350, usernameTextField.getPreferredSize().height));
@@ -145,7 +142,8 @@ public class Login extends JFrame {
 	}
 	
 	/**
-	 * 
+	 * Adds a second Button Panel that contains forgot username
+	 * and password
 	 * @author Elijah Rogers
 	 */
 	private class ButtonPanel1 extends JPanel {
@@ -188,7 +186,7 @@ public class Login extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			LoginManage manager = new LoginManage();
-			int check = manager.isValidCreds(usernameTextField.getText(), String.valueOf(passwordTextField.getPassword()));
+			int check = manager.isValidAccount(usernameTextField.getText(), String.valueOf(passwordTextField.getPassword()));
 			if (check == 1) {
 				responseLabel.setForeground(Color.RED);
 				responseLabel.setText("Username does not match an account");

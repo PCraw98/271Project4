@@ -1,5 +1,3 @@
-package signup;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -23,6 +21,7 @@ import javax.swing.JTextField;
  * 
  * @author Elijah Rogers
  */
+@SuppressWarnings("serial")
 public class Signup extends JFrame {
 	
 	//***********************||Instance Variables||***********************
@@ -30,9 +29,11 @@ public class Signup extends JFrame {
 	private JTextField usrnmTextField = new JTextField();
 	private JPasswordField psswrdTextField = new JPasswordField();
 	private JButton signupButton = new JButton();
+	private JButton loginButton = new JButton();
 	private Font font = new java.awt.Font("Dialog", 0, 13);
 	private UsernamePanel usrnmPanel;
 	private PasswordPanel psswrdPanel;
+	private ButtonPanel buttonPanel;
 	private MainPanel mainPanel;
 	
 	/**
@@ -45,6 +46,8 @@ public class Signup extends JFrame {
 	public Signup(String title) {
 		super(title);
 		setBounds(300,300,600,300);
+		
+		/* Try to get the Panels to stop shrinking when you press a button. Also put some space between the labels and text fields. */
 		
 		//*************************************||Main JLabels||***************************************
 		usrnmLabel = new JLabel();
@@ -68,6 +71,11 @@ public class Signup extends JFrame {
 		ButtonListener listener = new ButtonListener();
 		signupButton.addActionListener(listener);
 		
+		loginButton.setFont(font);
+		loginButton.setText("I already have an account.");
+		LoginListener loginListener = new LoginListener();
+		loginButton.addActionListener(loginListener);
+		
 		//*******************************||Initialize the text fields||*******************************
 		usrnmTextField.setMaximumSize(new Dimension(350, usrnmTextField.getPreferredSize().height));
 		usrnmTextField.setText("");
@@ -77,6 +85,7 @@ public class Signup extends JFrame {
 		//*************************||Create Panels and add to Content Pane||**************************
 		usrnmPanel = new UsernamePanel();
 		psswrdPanel = new PasswordPanel();
+		buttonPanel = new ButtonPanel();
 		mainPanel = new MainPanel();
 		getContentPane().add(mainPanel, BorderLayout.CENTER);
 	}
@@ -111,6 +120,15 @@ public class Signup extends JFrame {
 		}
 	}
 	
+	private class ButtonPanel extends JPanel {
+		public ButtonPanel() {
+			setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+			add(loginButton);
+			add(Box.createRigidArea(new Dimension(30, 0)));
+			add(signupButton);
+		}
+	}
+	
 	/**
 	 * Creates the main JPanel, to which is added the username
 	 * and password JPanels.
@@ -125,7 +143,7 @@ public class Signup extends JFrame {
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(psswrdPanel);
 			add(Box.createRigidArea(new Dimension(0, 30)));
-			add(signupButton);
+			add(buttonPanel);
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(responseLabel);
 			add(responseLabel1);
@@ -142,7 +160,7 @@ public class Signup extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			SignupManage manager = new SignupManage();
-			int check = manager.addNewAccount(usrnmTextField.getText(), String.valueOf(psswrdTextField.getPassword()));
+			int check = manager.addNewUser(usrnmTextField.getText(), String.valueOf(psswrdTextField.getPassword()));
 			if (check == 1) {
 				responseLabel.setForeground(Color.RED);
 				responseLabel.setText("Username is already in use.");
@@ -156,8 +174,28 @@ public class Signup extends JFrame {
 				responseLabel.setForeground(Color.BLUE);
 				responseLabel.setText("User successfully added");
 				responseLabel1.setText("");
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+				JFrame frame = new EditAccount("Edit Account");
+				frame.setResizable(false);
+				frame.setVisible(true);
+				dispose();
 			}
 		}
+	}
+	
+	private class LoginListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JFrame frame = new Login("Log In");
+			frame.setResizable(false);
+			frame.setVisible(true);
+			dispose();
+		}
+		
 	}
 	
 	/**
@@ -167,7 +205,8 @@ public class Signup extends JFrame {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		JFrame frame = new Signup("Signup Screen");
+		JFrame frame = new Signup("Sign Up");
+		frame.setResizable(false);
 		frame.setVisible(true);
 	}
 }
