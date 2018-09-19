@@ -1,12 +1,10 @@
-package user;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -14,8 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import signup.Signup;
 /**
  * The Signup class creates a GUI for the signup page. When the values entered
  * into the text fields are valid, it uses them to create a new User object.
@@ -38,6 +34,9 @@ public class DeleteAccount extends JFrame {
 	private JLabel deleted;
 	private JButton returnToSignup;
 	
+	private ArrayList<User> list;
+	private String current;
+	
 	/**
 	 * Overrides the JFrame constructor. Takes in a String as a title,
 	 * then sets up every element of the GUI to be passed in to the JPanel
@@ -45,12 +44,13 @@ public class DeleteAccount extends JFrame {
 	 * 
 	 * @param title
 	 */
-	public DeleteAccount(String title) {
+	public DeleteAccount(String title, ArrayList<User> list, String current) {
 		super(title);
-		setBounds(300,300,450,200);
+		this.list = list;
+		this.current = current;
+		setBounds(300,300,300,300);
 		
 		/* Try to get the label to actually be centered. I have no idea what's wrong. */
-		// Brian fixed this issue -Brian
 		
 		//||Yes Button||
 		yesButton = new JButton();
@@ -68,7 +68,7 @@ public class DeleteAccount extends JFrame {
 		
 		label = new JLabel();
 		label.setFont(font);
-		label.setText("Are you sure you want to permanently delete your account?"); 
+		label.setText("Are you sure?");
 		
 		//||Bottom Section||
 		deleted = new JLabel();
@@ -95,6 +95,12 @@ public class DeleteAccount extends JFrame {
 	private class YesListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
+			UserManage manager = new UserManage();
+			manager.setUsers(list);
+			manager.setUsername(current);
+			manager.deleteAccount();
+			list = manager.getUsers();
+			
 			deleted.setVisible(true);
 			returnToSignup.setVisible(true);
 		}
@@ -103,7 +109,7 @@ public class DeleteAccount extends JFrame {
 	private class NoListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			JFrame frame = new EditAccount("Edit Account");
+			JFrame frame = new EditAccount("Edit Account", list, current);
 			frame.setResizable(false);
 			frame.setVisible(true);
 			dispose();
@@ -113,7 +119,7 @@ public class DeleteAccount extends JFrame {
 	private class SignupListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			JFrame frame = new Signup("Signup");
+			JFrame frame = new Signup("Signup", list);
 			frame.setResizable(false);
 			frame.setVisible(true);
 			dispose();
@@ -156,7 +162,6 @@ public class DeleteAccount extends JFrame {
 		public MainPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 			add(emptyPanel);
-			label.setAlignmentX(Component.CENTER_ALIGNMENT);
 			add(label);
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(buttonPanel);
@@ -171,9 +176,9 @@ public class DeleteAccount extends JFrame {
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		JFrame frame = new DeleteAccount("Delete Account");
-		frame.setResizable(false);
-		frame.setVisible(true);
-	}
+//	public static void main(String[] args) {
+//		JFrame frame = new DeleteAccount("Delete Account", null);
+//		frame.setResizable(false);
+//		frame.setVisible(true);
+//	}
 }

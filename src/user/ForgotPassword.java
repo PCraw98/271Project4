@@ -1,11 +1,9 @@
-package user;
-
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -38,6 +36,8 @@ public class ForgotPassword extends JFrame {
 	private PasswordPanel1 cnfrmpsswrdPanel;
 	private MainPanel mainPanel;
 	
+	private ArrayList<User> list;
+	
 	/**
 	 * Overrides the JFrame constructor. Takes in a String as a title,
 	 * then sets up every element of the GUI to be passed in to the JPanel
@@ -45,8 +45,9 @@ public class ForgotPassword extends JFrame {
 	 * 
 	 * @param title
 	 */
-	public ForgotPassword(String title) {
+	public ForgotPassword(String title, ArrayList<User> list) {
 		super(title);
+		this.list = list;
 		setBounds(300,300,600,300);
 		
 		//*************************************||Main JLabels||***************************************
@@ -75,11 +76,11 @@ public class ForgotPassword extends JFrame {
 		submitButton.addActionListener(listener);
 		
 		//*******************************||Initialize the text fields||*******************************
-		usrnmTextField.setMaximumSize(new Dimension(352, usrnmTextField.getPreferredSize().height));
+		usrnmTextField.setMaximumSize(new Dimension(350, usrnmTextField.getPreferredSize().height));
 		usrnmTextField.setText("");
-		psswrdTextField.setMaximumSize(new Dimension(355, psswrdTextField.getPreferredSize().height));
+		psswrdTextField.setMaximumSize(new Dimension(350, psswrdTextField.getPreferredSize().height));
 		psswrdTextField.setText("");
-		cnfrmpsswrdTextField.setMaximumSize(new Dimension(300, psswrdTextField.getPreferredSize().height));
+		cnfrmpsswrdTextField.setMaximumSize(new Dimension(305, psswrdTextField.getPreferredSize().height));
 		cnfrmpsswrdTextField.setText("");
 		
 		//*************************||Create Panels and add to Content Pane||**************************
@@ -145,7 +146,6 @@ public class ForgotPassword extends JFrame {
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(cnfrmpsswrdPanel);
 			add(Box.createRigidArea(new Dimension(0, 30)));
-			submitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 			add(submitButton);
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(responseLabel);
@@ -174,9 +174,9 @@ public class ForgotPassword extends JFrame {
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		JFrame frame = new ForgotPassword("Reset Password");
-		frame.setResizable(false);
-		frame.setVisible(true);
-	}
+//	public static void main(String[] args) {
+//		JFrame frame = new ForgotPassword("Forgot Password", null);
+//		frame.setResizable(false);
+//		frame.setVisible(true);
+//	}
 }

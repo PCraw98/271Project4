@@ -1,5 +1,4 @@
-package user;
-
+import java.io.Console;
 import java.util.ArrayList;
 
 /**
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 
 public class UserManage {
 
-	private  ArrayList<User> users;
+	private ArrayList<User> users;
 	private String currUserLoggedIn;
 	
 	public UserManage() {
@@ -23,8 +22,12 @@ public class UserManage {
 		addNewUser("admin", "Password123");
 	}
 	
-	public  ArrayList<User> getUsers() {
+	public ArrayList<User> getUsers() {
 		return users;
+	}
+	
+	public void setUsers(ArrayList<User> list) {
+		users = list;
 	}
 	
 	/**
@@ -39,10 +42,11 @@ public class UserManage {
 			return 1; //if username is already in use, return 1
 		} else if(!isValidPassword(password)) {
 			return 2; //if password is does not meet criteria, return 1
-		}else
+		} else {
 			users.add(new User(username, password));
-			setUsername(username);
+//			setUsername(username);
 			return 0; //return 0 if user is successfully added
+		}
 	}
 
 	/**
@@ -96,13 +100,26 @@ public class UserManage {
 			}
 		}
 		return false;
-	}	
+	}
+	
+	public int isValidAccount(String username, String password) {
+		for(int i = 0; i < users.size(); i++) {
+			User currUser = users.get(i);
+			if(currUser.doesUserExist(username) && currUser.isPasswordCorrect(password)) {
+				setUsername(username);
+				return 0;
+			} else if(currUser.doesUserExist(username) && !currUser.isPasswordCorrect(password)) {
+				return 2;
+			}
+		}
+		return 1;
+	}
 	
 	/**
 	 * Sets currUser as the user who is currently logged in
 	 * @param user
 	 */
-	public  void setUsername(String user) {
+	public void setUsername(String user) {
 		currUserLoggedIn = user;
 	}
 
@@ -110,20 +127,19 @@ public class UserManage {
 	 * Returns the username of the user currently logged in
 	 * @return currUser
 	 */
-	public  String getUsername() {
+	public String getUsername() {
 		return currUserLoggedIn;
 	}
 	
 	/**
 	 * Deletes account from the arrayList
 	 */
-	public  void deleteAccount() {
+	public void deleteAccount() {
 		for(int i = 0; i < users.size(); i++) {
 			User currUser = users.get(i);
-			if(currUser.equals(currUserLoggedIn)) {
-				users.remove(currUser);
-			} 
-		} 
+			if(currUser.getUsername().equals(currUserLoggedIn)) {
+				users.remove(i);
+			}
+		}
 	}
-	
 }

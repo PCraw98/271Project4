@@ -1,13 +1,3 @@
-package user;
-
-/**
- * Sets up the constructor and methods for the User class, which contains
- * a username and password. Each account is a User object.
- * 
- * @author Jasmine Jess
- *
- */
-
 public class User {
 	private String username;
 	private String password;
@@ -15,6 +5,15 @@ public class User {
 	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
+	}
+	
+	public void setPassword(String pass) {
+		password = pass;
+		
+	}
+	
+	public String getUsername() {
+		return username;
 	}
 	
 	/**
