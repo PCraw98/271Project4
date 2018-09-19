@@ -2,6 +2,7 @@ package user;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -46,9 +47,10 @@ public class DeleteAccount extends JFrame {
 	 */
 	public DeleteAccount(String title) {
 		super(title);
-		setBounds(300,300,300,300);
+		setBounds(300,300,450,200);
 		
 		/* Try to get the label to actually be centered. I have no idea what's wrong. */
+		// Brian fixed this issue -Brian
 		
 		//||Yes Button||
 		yesButton = new JButton();
@@ -66,7 +68,7 @@ public class DeleteAccount extends JFrame {
 		
 		label = new JLabel();
 		label.setFont(font);
-		label.setText("Are you sure?");
+		label.setText("Are you sure you want to permanently delete your account?"); 
 		
 		//||Bottom Section||
 		deleted = new JLabel();
@@ -154,6 +156,7 @@ public class DeleteAccount extends JFrame {
 		public MainPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 			add(emptyPanel);
+			label.setAlignmentX(Component.CENTER_ALIGNMENT);
 			add(label);
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(buttonPanel);
