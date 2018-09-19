@@ -22,6 +22,7 @@ import login.Login;
  * The checks for valid login info are handed by SignupManage.java.
  * 
  * @author Elijah Rogers
+ * @author Brian Clow
  */
 @SuppressWarnings("serial")
 public class EditAccount extends JFrame {
@@ -45,8 +46,7 @@ public class EditAccount extends JFrame {
 		super(title);
 		setBounds(300,300,375,300);
 		
-		/* Try to get the buttons to be centered. It'll look better. */
-		
+		//||Welcome to Account label||
 		welcomeToAccountLabel = new JLabel();
 		welcomeToAccountLabel.setFont(font);
 		welcomeToAccountLabel.setText("Welcome to your Account!"); 
@@ -123,7 +123,13 @@ public class EditAccount extends JFrame {
 			dispose();
 		}
 	}
-	
+	/**
+	 * Adds all of the buttons/labels and centers them.
+	 * 
+	 * @author Elijah Rogers
+	 * @author Brian Clow
+	 *
+	 */
 	private class ButtonPanel extends JPanel {
 		public ButtonPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
