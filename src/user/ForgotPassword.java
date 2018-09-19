@@ -1,6 +1,7 @@
 package user;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -74,11 +75,11 @@ public class ForgotPassword extends JFrame {
 		submitButton.addActionListener(listener);
 		
 		//*******************************||Initialize the text fields||*******************************
-		usrnmTextField.setMaximumSize(new Dimension(350, usrnmTextField.getPreferredSize().height));
+		usrnmTextField.setMaximumSize(new Dimension(352, usrnmTextField.getPreferredSize().height));
 		usrnmTextField.setText("");
-		psswrdTextField.setMaximumSize(new Dimension(350, psswrdTextField.getPreferredSize().height));
+		psswrdTextField.setMaximumSize(new Dimension(355, psswrdTextField.getPreferredSize().height));
 		psswrdTextField.setText("");
-		cnfrmpsswrdTextField.setMaximumSize(new Dimension(305, psswrdTextField.getPreferredSize().height));
+		cnfrmpsswrdTextField.setMaximumSize(new Dimension(300, psswrdTextField.getPreferredSize().height));
 		cnfrmpsswrdTextField.setText("");
 		
 		//*************************||Create Panels and add to Content Pane||**************************
@@ -144,6 +145,7 @@ public class ForgotPassword extends JFrame {
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(cnfrmpsswrdPanel);
 			add(Box.createRigidArea(new Dimension(0, 30)));
+			submitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 			add(submitButton);
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(responseLabel);
@@ -173,7 +175,7 @@ public class ForgotPassword extends JFrame {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		JFrame frame = new ForgotPassword("Forgot Password");
+		JFrame frame = new ForgotPassword("Reset Password");
 		frame.setResizable(false);
 		frame.setVisible(true);
 	}

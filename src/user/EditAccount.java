@@ -11,6 +11,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import login.Login;
@@ -21,6 +22,7 @@ import login.Login;
  * The checks for valid login info are handed by SignupManage.java.
  * 
  * @author Elijah Rogers
+ * @author Brian Clow
  */
 @SuppressWarnings("serial")
 public class EditAccount extends JFrame {
@@ -30,6 +32,7 @@ public class EditAccount extends JFrame {
 	private MainPanel mainPanel;
 	private ButtonPanel buttonPanel;
 	private EmptyPanel emptyPanel;
+	private JLabel welcomeToAccountLabel;
 	private JButton retrieveButton, forgotButton, deleteButton, logoutButton;
 	
 	/**
@@ -43,7 +46,11 @@ public class EditAccount extends JFrame {
 		super(title);
 		setBounds(300,300,375,300);
 		
-		/* Try to get the buttons to be centered. It'll look better. */
+		//||Welcome to Account label||
+		welcomeToAccountLabel = new JLabel();
+		welcomeToAccountLabel.setFont(font);
+		welcomeToAccountLabel.setText("Welcome to your Account!"); 
+		
 		
 		//||Retrieve Username Button||
 		retrieveButton = new JButton();
@@ -116,11 +123,19 @@ public class EditAccount extends JFrame {
 			dispose();
 		}
 	}
-	
+	/**
+	 * Adds all of the buttons/labels and centers them.
+	 * 
+	 * @author Elijah Rogers
+	 * @author Brian Clow
+	 *
+	 */
 	private class ButtonPanel extends JPanel {
 		public ButtonPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-//			add(Box.createRigidArea(new Dimension(0, 0)));
+			welcomeToAccountLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+			add(welcomeToAccountLabel);
+			add(Box.createRigidArea(new Dimension(0, 10)));
 			retrieveButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 			add(retrieveButton);
 			add(Box.createRigidArea(new Dimension(0, 30)));
@@ -144,7 +159,7 @@ public class EditAccount extends JFrame {
 	private class EmptyPanel extends JPanel {
 		public EmptyPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-			add(Box.createRigidArea(new Dimension(100, 0)));
+			add(Box.createRigidArea(new Dimension(110, 0)));
 		}
 	}
 	

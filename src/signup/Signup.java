@@ -2,6 +2,7 @@ package signup;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -30,7 +31,7 @@ import user.EditAccount;
 public class Signup extends JFrame {
 	
 	//***********************||Instance Variables||***********************
-	private JLabel usrnmLabel, psswrdLabel, responseLabel, responseLabel1;
+	private JLabel createAccountLabel, usrnmLabel, psswrdLabel, responseLabel, responseLabel1;
 	private JTextField usrnmTextField = new JTextField();
 	private JPasswordField psswrdTextField = new JPasswordField();
 	private JButton signupButton = new JButton();
@@ -50,11 +51,15 @@ public class Signup extends JFrame {
 	 */
 	public Signup(String title) {
 		super(title);
-		setBounds(300,300,600,300);
+		setBounds(300,300,550,300);
 		
 		/* Try to get the Panels to stop shrinking when you press a button. Also put some space between the labels and text fields. */
 		
 		//*************************************||Main JLabels||***************************************
+		createAccountLabel = new JLabel();
+		createAccountLabel.setFont(font);
+		createAccountLabel.setText("Create an Account!");
+		
 		usrnmLabel = new JLabel();
 		usrnmLabel.setFont(font);
 		usrnmLabel.setText("Username:");
@@ -72,19 +77,19 @@ public class Signup extends JFrame {
 		
 		//********************||Initialize Signup Button and its ActionListener||*********************
 		signupButton.setFont(font);
-		signupButton.setText("Sign up");
+		signupButton.setText("Sign up!");
 		ButtonListener listener = new ButtonListener();
 		signupButton.addActionListener(listener);
 		
 		loginButton.setFont(font);
-		loginButton.setText("I already have an account.");
+		loginButton.setText("Already have an account?  Log In!");
 		LoginListener loginListener = new LoginListener();
 		loginButton.addActionListener(loginListener);
 		
 		//*******************************||Initialize the text fields||*******************************
-		usrnmTextField.setMaximumSize(new Dimension(350, usrnmTextField.getPreferredSize().height));
+		usrnmTextField.setMaximumSize(new Dimension(275, usrnmTextField.getPreferredSize().height));
 		usrnmTextField.setText("");
-		psswrdTextField.setMaximumSize(new Dimension(350, psswrdTextField.getPreferredSize().height));
+		psswrdTextField.setMaximumSize(new Dimension(275, psswrdTextField.getPreferredSize().height));
 		psswrdTextField.setText("");
 		
 		//*************************||Create Panels and add to Content Pane||**************************
@@ -104,7 +109,7 @@ public class Signup extends JFrame {
 	private class UsernamePanel extends JPanel {
 		public UsernamePanel() {
 			setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-			add(Box.createRigidArea(new Dimension(30, 0)));
+//			add(Box.createRigidArea(new Dimension(10, 0)));
 			add(usrnmLabel);
 			add(usrnmTextField);
 		}
@@ -119,7 +124,7 @@ public class Signup extends JFrame {
 	private class PasswordPanel extends JPanel {
 		public PasswordPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-			add(Box.createRigidArea(new Dimension(30, 0)));
+//			add(Box.createRigidArea(new Dimension(30, 0)));
 			add(psswrdLabel);
 			add(psswrdTextField);
 		}
@@ -127,10 +132,14 @@ public class Signup extends JFrame {
 	
 	private class ButtonPanel extends JPanel {
 		public ButtonPanel() {
-			setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-			add(loginButton);
-			add(Box.createRigidArea(new Dimension(30, 0)));
+			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+			signupButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 			add(signupButton);
+			add(Box.createRigidArea(new Dimension(0, 30)));
+			loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+			add(loginButton);
+			add(Box.createRigidArea(new Dimension(0, 15)));
+
 		}
 	}
 	
@@ -144,10 +153,13 @@ public class Signup extends JFrame {
 		public MainPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 			add(Box.createRigidArea(new Dimension(0, 30)));
+			createAccountLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+			add(createAccountLabel);
+			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(usrnmPanel);
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(psswrdPanel);
-			add(Box.createRigidArea(new Dimension(0, 30)));
+			add(Box.createRigidArea(new Dimension(0, 20)));
 			add(buttonPanel);
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(responseLabel);

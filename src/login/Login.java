@@ -2,6 +2,7 @@ package login;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -32,7 +33,7 @@ import user.ForgotUsername;
 public class Login extends JFrame {
 	
 	//***********************\\Instance Variables//***********************
-	private JLabel usernameLabel, passwordLabel, responseLabel;
+	private JLabel welcomeLabel, usernameLabel, passwordLabel, responseLabel;
 	private JTextField usernameTextField = new JTextField();
 	private JPasswordField passwordTextField = new JPasswordField();
 	private JButton loginButton = new JButton();
@@ -55,7 +56,14 @@ public class Login extends JFrame {
 		super(title);
 		setBounds(300,300,500,350);
 		
+		
+		add(Box.createRigidArea(new Dimension(30,0)));
+		add(signupButton);
+		
 		//*************************************\/\Main JLabels/\/***************************************
+		welcomeLabel = new JLabel();
+		welcomeLabel.setFont(font);
+		welcomeLabel.setText("Log in to your Account!");
 		usernameLabel = new JLabel();
 		usernameLabel.setFont(font);
 		usernameLabel.setText("Username:");
@@ -71,27 +79,27 @@ public class Login extends JFrame {
 		//********************\/\Initialize Signup Button and its ActionListener/\/*********************
 		loginButton.setFont(font);
 		signupButton.setFont(font);
-		loginButton.setText("Login");
-		signupButton.setText("New User? Sign Up");
+		loginButton.setText("Log in!");
+		signupButton.setText("Don't have an account?  Sign up!");
 		ButtonListener listener = new ButtonListener();
 		loginButton.addActionListener(listener);
 		
 		//*******************************\/\Initialize the text fields/\/*******************************
-		usernameTextField.setMaximumSize(new Dimension(350, usernameTextField.getPreferredSize().height));
+		usernameTextField.setMaximumSize(new Dimension(250, usernameTextField.getPreferredSize().height));
 		usernameTextField.setText("");
-		passwordTextField.setMaximumSize(new Dimension(350, passwordTextField.getPreferredSize().height));
+		passwordTextField.setMaximumSize(new Dimension(250, passwordTextField.getPreferredSize().height));
 		passwordTextField.setText("");
 		
 		
 		usernameButton = new JButton();
 		usernameButton.setFont(font);
-		usernameButton.setText("Forgot Username");
+		usernameButton.setText("Forgot Username?");
 		UsernameListener usernameListener = new UsernameListener();
 		usernameButton.addActionListener(usernameListener);
 		
 		passwordButton = new JButton();
 		passwordButton.setFont(font);
-		passwordButton.setText("Forgot Password");
+		passwordButton.setText("Forgot Password?");
 		PasswordListener passwordListener = new PasswordListener();
 		passwordButton.addActionListener(passwordListener);
 		
@@ -141,9 +149,7 @@ public class Login extends JFrame {
 	private class ButtonPanel extends JPanel {
 		public ButtonPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-			add(Box.createRigidArea(new Dimension(30,0)));
 			add(loginButton);
-			add(Box.createRigidArea(new Dimension(30,0)));
 			add(signupButton);
 		}
 	}
@@ -169,15 +175,23 @@ public class Login extends JFrame {
 	private class MainPanel extends JPanel {
 		public MainPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+			welcomeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+			add(Box.createRigidArea(new Dimension(0, 20)));
+			add(welcomeLabel);
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(usernamePanel);
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(passwordPanel);
+			add(Box.createRigidArea(new Dimension(0, 20)));
+			loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+			add(loginButton);
+
+			add(Box.createRigidArea(new Dimension(0, 30)));
+			buttonPanel1.setAlignmentX(Component.CENTER_ALIGNMENT);
+			add(buttonPanel1);
+			buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(buttonPanel);
-			add(Box.createRigidArea(new Dimension(0, 30)));
-			add(buttonPanel1);
-			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(responseLabel);
 		}
 		
