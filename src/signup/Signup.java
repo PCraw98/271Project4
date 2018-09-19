@@ -159,7 +159,7 @@ public class Signup extends JFrame {
 			add(usrnmPanel);
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(psswrdPanel);
-			add(Box.createRigidArea(new Dimension(0, 30)));
+			add(Box.createRigidArea(new Dimension(0, 20)));
 			add(buttonPanel);
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(responseLabel);
