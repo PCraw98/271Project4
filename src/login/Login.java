@@ -1,12 +1,10 @@
-package login;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -16,11 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
-import signup.Signup;
-import user.EditAccount;
-import user.ForgotPassword;
-import user.ForgotUsername;
 
 
 /**
@@ -33,7 +26,7 @@ import user.ForgotUsername;
 public class Login extends JFrame {
 	
 	//***********************\\Instance Variables//***********************
-	private JLabel welcomeLabel, usernameLabel, passwordLabel, responseLabel;
+	private JLabel usernameLabel, passwordLabel, responseLabel;
 	private JTextField usernameTextField = new JTextField();
 	private JPasswordField passwordTextField = new JPasswordField();
 	private JButton loginButton = new JButton();
@@ -48,22 +41,20 @@ public class Login extends JFrame {
 	private JButton usernameButton;
 	private ButtonPanel1 buttonPanel1;
 	
+	private ArrayList<User> list;
+	private String current;
+	private UserManage manager;
+	
 	/**
 	 * Builds each element of the GUI to be and sets the bounds, labels, and text.
 	 * @param title
 	 */
-	public Login(String title) {
+	public Login(String title, ArrayList<User> list) {
 		super(title);
+		this.list = list;
 		setBounds(300,300,500,350);
 		
-		
-		add(Box.createRigidArea(new Dimension(30,0)));
-		add(signupButton);
-		
 		//*************************************\/\Main JLabels/\/***************************************
-		welcomeLabel = new JLabel();
-		welcomeLabel.setFont(font);
-		welcomeLabel.setText("Log in to your Account!");
 		usernameLabel = new JLabel();
 		usernameLabel.setFont(font);
 		usernameLabel.setText("Username:");
@@ -79,27 +70,27 @@ public class Login extends JFrame {
 		//********************\/\Initialize Signup Button and its ActionListener/\/*********************
 		loginButton.setFont(font);
 		signupButton.setFont(font);
-		loginButton.setText("Log in!");
-		signupButton.setText("Don't have an account?  Sign up!");
+		loginButton.setText("Login");
+		signupButton.setText("New User? Sign Up");
 		ButtonListener listener = new ButtonListener();
 		loginButton.addActionListener(listener);
 		
 		//*******************************\/\Initialize the text fields/\/*******************************
-		usernameTextField.setMaximumSize(new Dimension(250, usernameTextField.getPreferredSize().height));
+		usernameTextField.setMaximumSize(new Dimension(350, usernameTextField.getPreferredSize().height));
 		usernameTextField.setText("");
-		passwordTextField.setMaximumSize(new Dimension(250, passwordTextField.getPreferredSize().height));
+		passwordTextField.setMaximumSize(new Dimension(350, passwordTextField.getPreferredSize().height));
 		passwordTextField.setText("");
 		
 		
 		usernameButton = new JButton();
 		usernameButton.setFont(font);
-		usernameButton.setText("Forgot Username?");
+		usernameButton.setText("Forgot Username");
 		UsernameListener usernameListener = new UsernameListener();
 		usernameButton.addActionListener(usernameListener);
 		
 		passwordButton = new JButton();
 		passwordButton.setFont(font);
-		passwordButton.setText("Forgot Password?");
+		passwordButton.setText("Forgot Password");
 		PasswordListener passwordListener = new PasswordListener();
 		passwordButton.addActionListener(passwordListener);
 		
@@ -149,7 +140,9 @@ public class Login extends JFrame {
 	private class ButtonPanel extends JPanel {
 		public ButtonPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+			add(Box.createRigidArea(new Dimension(30,0)));
 			add(loginButton);
+			add(Box.createRigidArea(new Dimension(30,0)));
 			add(signupButton);
 		}
 	}
@@ -175,23 +168,15 @@ public class Login extends JFrame {
 	private class MainPanel extends JPanel {
 		public MainPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-			welcomeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-			add(Box.createRigidArea(new Dimension(0, 20)));
-			add(welcomeLabel);
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(usernamePanel);
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(passwordPanel);
-			add(Box.createRigidArea(new Dimension(0, 20)));
-			loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-			add(loginButton);
-
-			add(Box.createRigidArea(new Dimension(0, 30)));
-			buttonPanel1.setAlignmentX(Component.CENTER_ALIGNMENT);
-			add(buttonPanel1);
-			buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(buttonPanel);
+			add(Box.createRigidArea(new Dimension(0, 30)));
+			add(buttonPanel1);
+			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(responseLabel);
 		}
 		
@@ -206,8 +191,9 @@ public class Login extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			LoginManage manager = new LoginManage();
-			int check = manager.isValidCreds(usernameTextField.getText(), String.valueOf(passwordTextField.getPassword()));
+			manager = new UserManage();
+			manager.setUsers(list);
+			int check = manager.isValidAccount(usernameTextField.getText(), String.valueOf(passwordTextField.getPassword()));
 			if (check == 1) {
 				responseLabel.setForeground(Color.RED);
 				responseLabel.setText("Username does not match an account");
@@ -215,7 +201,8 @@ public class Login extends JFrame {
 				responseLabel.setForeground(Color.RED);
 				responseLabel.setText("Password is incorrect for entered username");
 			} else if (check == 0) {
-				JFrame frame = new EditAccount("Edit Account");
+				current = manager.getUsername();
+				JFrame frame = new EditAccount("Edit Account", list, current);
 				frame.setResizable(false);
 				frame.setVisible(true);
 				dispose();
@@ -243,7 +230,7 @@ public class Login extends JFrame {
 	private class PasswordListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JFrame frame = new ForgotPassword("Forgot Password");
+			JFrame frame = new ForgotPassword("Forgot Password", list);
 			frame.setResizable(false);
 			frame.setVisible(true);
 			dispose();
@@ -257,7 +244,7 @@ public class Login extends JFrame {
 	private class SignupListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JFrame frame = new Signup("Sign Up");
+			JFrame frame = new Signup("Sign Up", null);
 			frame.setResizable(false);
 			frame.setVisible(true);
 			dispose();
@@ -268,9 +255,9 @@ public class Login extends JFrame {
 	 * Creates the frame and adds all everything to the frame. 
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		JFrame frame = new Login("Login Screen");
-		frame.setResizable(false);
-		frame.setVisible(true);
-	}
+//	public static void main(String[] args) {
+//		JFrame frame = new Login("Login Screen");
+//		frame.setResizable(false);
+//		frame.setVisible(true);
+//	}
 }
