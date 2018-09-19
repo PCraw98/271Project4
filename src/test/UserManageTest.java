@@ -48,4 +48,12 @@ public class UserManageTest extends TestCase{
 		assertFalse(testUsers.isValidPassword("Short1"));
 	}
 	
+	/**
+	 * Test for valid account credentials
+	 */
+	public void testIsValidCreds() {
+		assertEquals(0, testUsers.isValidCreds("testaccount1", "Testpass123"));
+		assertEquals(1, testUsers.isValidCreds("testaccount1", "badpass"));
+		assertEquals(2, testUsers.isValidCreds("baduser", "Testpass123"));
+	}
 }
