@@ -46,11 +46,12 @@ public class RetrieveUsername extends JFrame {
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 			
 			add(Box.createRigidArea(new Dimension(0, 30)));
-			add(Box.createRigidArea(new Dimension(0, 20)));
 			
 			label.setAlignmentX(Component.CENTER_ALIGNMENT);
-			usernameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
 			add(label);
+			add(Box.createRigidArea(new Dimension(0, 10)));
+			usernameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 			add(usernameLabel);
 		}
 	}

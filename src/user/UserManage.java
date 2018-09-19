@@ -15,15 +15,15 @@ import java.util.ArrayList;
 
 public class UserManage {
 
-	private static ArrayList<User> users;
-	private static String currUserLoggedIn;
+	private  ArrayList<User> users;
+	private String currUserLoggedIn;
 	
 	public UserManage() {
 		users = new ArrayList<User>();
 		addNewUser("admin", "Password123");
 	}
 	
-	public static ArrayList<User> getUsers() {
+	public  ArrayList<User> getUsers() {
 		return users;
 	}
 	
@@ -102,7 +102,7 @@ public class UserManage {
 	 * Sets currUser as the user who is currently logged in
 	 * @param user
 	 */
-	public static void setUsername(String user) {
+	public  void setUsername(String user) {
 		currUserLoggedIn = user;
 	}
 
@@ -110,14 +110,14 @@ public class UserManage {
 	 * Returns the username of the user currently logged in
 	 * @return currUser
 	 */
-	public static String getUsername() {
+	public  String getUsername() {
 		return currUserLoggedIn;
 	}
 	
 	/**
 	 * Deletes account from the arrayList
 	 */
-	public static void deleteAccount() {
+	public  void deleteAccount() {
 		for(int i = 0; i < users.size(); i++) {
 			User currUser = users.get(i);
 			if(currUser.equals(currUserLoggedIn)) {

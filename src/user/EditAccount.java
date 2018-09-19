@@ -1,6 +1,7 @@
 package user;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -40,7 +41,7 @@ public class EditAccount extends JFrame {
 	 */
 	public EditAccount(String title) {
 		super(title);
-		setBounds(300,300,400,300);
+		setBounds(300,300,375,300);
 		
 		/* Try to get the buttons to be centered. It'll look better. */
 		
@@ -119,13 +120,17 @@ public class EditAccount extends JFrame {
 	private class ButtonPanel extends JPanel {
 		public ButtonPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-//			add(Box.createRigidArea(new Dimension(0, 30)));
+//			add(Box.createRigidArea(new Dimension(0, 0)));
+			retrieveButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 			add(retrieveButton);
 			add(Box.createRigidArea(new Dimension(0, 30)));
+			forgotButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 			add(forgotButton);
 			add(Box.createRigidArea(new Dimension(0, 30)));
+			deleteButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 			add(deleteButton);
 			add(Box.createRigidArea(new Dimension(0, 30)));
+			logoutButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 			add(logoutButton);
 		}
 	}
