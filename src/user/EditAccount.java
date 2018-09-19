@@ -1,20 +1,15 @@
-package user;
-
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import login.Login;
 
 /**
  * The Signup class creates a GUI for the signup page. When the values entered
@@ -22,7 +17,6 @@ import login.Login;
  * The checks for valid login info are handed by SignupManage.java.
  * 
  * @author Elijah Rogers
- * @author Brian Clow
  */
 @SuppressWarnings("serial")
 public class EditAccount extends JFrame {
@@ -32,8 +26,10 @@ public class EditAccount extends JFrame {
 	private MainPanel mainPanel;
 	private ButtonPanel buttonPanel;
 	private EmptyPanel emptyPanel;
-	private JLabel welcomeToAccountLabel;
 	private JButton retrieveButton, forgotButton, deleteButton, logoutButton;
+	
+	private ArrayList<User> list;
+	private String current;
 	
 	/**
 	 * Overrides the JFrame constructor. Takes in a String as a title,
@@ -42,15 +38,13 @@ public class EditAccount extends JFrame {
 	 * 
 	 * @param title
 	 */
-	public EditAccount(String title) {
+	public EditAccount(String title, ArrayList<User> list, String current) {
 		super(title);
-		setBounds(300,300,375,300);
+		this.list = list;
+		this.current = current;
+		setBounds(300,300,400,300);
 		
-		//||Welcome to Account label||
-		welcomeToAccountLabel = new JLabel();
-		welcomeToAccountLabel.setFont(font);
-		welcomeToAccountLabel.setText("Welcome to your Account!"); 
-		
+		/* Try to get the buttons to be centered. It'll look better. */
 		
 		//||Retrieve Username Button||
 		retrieveButton = new JButton();
@@ -90,24 +84,25 @@ public class EditAccount extends JFrame {
 	private class RetrieveListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			
+			JFrame frame = new RetrieveUsername("Retrieve Username", list, current);
+			frame.setResizable(false);
+			frame.setVisible(true);
 		}
 	}
 	
 	private class ForgotListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JFrame frame = new ForgotPassword("Forgot Password");
+			JFrame frame = new ForgotPassword("Forgot Password", list);
 			frame.setResizable(false);
 			frame.setVisible(true);
-			dispose();
 		}
 	}
 	
 	private class DeleteListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JFrame frame = new DeleteAccount("Delete Account");
+			JFrame frame = new DeleteAccount("Delete Account", list, current);
 			frame.setResizable(false);
 			frame.setVisible(true);
 			dispose();
@@ -117,35 +112,23 @@ public class EditAccount extends JFrame {
 	private class LogoutListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			JFrame frame = new Login("Log In");
+			JFrame frame = new Login("Log In", list);
 			frame.setResizable(false);
 			frame.setVisible(true);
 			dispose();
 		}
 	}
-	/**
-	 * Adds all of the buttons/labels and centers them.
-	 * 
-	 * @author Elijah Rogers
-	 * @author Brian Clow
-	 *
-	 */
+	
 	private class ButtonPanel extends JPanel {
 		public ButtonPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-			welcomeToAccountLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-			add(welcomeToAccountLabel);
-			add(Box.createRigidArea(new Dimension(0, 10)));
-			retrieveButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+//			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(retrieveButton);
 			add(Box.createRigidArea(new Dimension(0, 30)));
-			forgotButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 			add(forgotButton);
 			add(Box.createRigidArea(new Dimension(0, 30)));
-			deleteButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 			add(deleteButton);
 			add(Box.createRigidArea(new Dimension(0, 30)));
-			logoutButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 			add(logoutButton);
 		}
 	}
@@ -159,7 +142,7 @@ public class EditAccount extends JFrame {
 	private class EmptyPanel extends JPanel {
 		public EmptyPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-			add(Box.createRigidArea(new Dimension(110, 0)));
+			add(Box.createRigidArea(new Dimension(100, 0)));
 		}
 	}
 	
@@ -177,9 +160,9 @@ public class EditAccount extends JFrame {
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		JFrame frame = new EditAccount("Edit Account");
-		frame.setResizable(false);
-		frame.setVisible(true);
-	}
+//	public static void main(String[] args) {
+//		JFrame frame = new EditAccount("Edit Account", null);
+//		frame.setResizable(false);
+//		frame.setVisible(true);
+//	}
 }
