@@ -1,12 +1,10 @@
-package signup;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -16,9 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
-import login.Login;
-import user.EditAccount;
 
 /**
  * The Signup class creates a GUI for the signup page. When the values entered
@@ -31,7 +26,7 @@ import user.EditAccount;
 public class Signup extends JFrame {
 	
 	//***********************||Instance Variables||***********************
-	private JLabel createAccountLabel, usrnmLabel, psswrdLabel, responseLabel, responseLabel1;
+	private JLabel usrnmLabel, psswrdLabel, responseLabel, responseLabel1;
 	private JTextField usrnmTextField = new JTextField();
 	private JPasswordField psswrdTextField = new JPasswordField();
 	private JButton signupButton = new JButton();
@@ -41,6 +36,9 @@ public class Signup extends JFrame {
 	private PasswordPanel psswrdPanel;
 	private ButtonPanel buttonPanel;
 	private MainPanel mainPanel;
+	private UserManage manager;
+	
+	private ArrayList<User> list;
 	
 	/**
 	 * Overrides the JFrame constructor. Takes in a String as a title,
@@ -49,17 +47,19 @@ public class Signup extends JFrame {
 	 * 
 	 * @param title
 	 */
-	public Signup(String title) {
+	public Signup(String title, ArrayList<User> list) {
 		super(title);
-		setBounds(300,300,550,300);
+		this.list = list;
+		manager = new UserManage();
+		if (list != null) {
+			manager.setUsers(list);
+		}
+		
+		setBounds(300,300,600,300);
 		
 		/* Try to get the Panels to stop shrinking when you press a button. Also put some space between the labels and text fields. */
 		
 		//*************************************||Main JLabels||***************************************
-		createAccountLabel = new JLabel();
-		createAccountLabel.setFont(font);
-		createAccountLabel.setText("Create an Account!");
-		
 		usrnmLabel = new JLabel();
 		usrnmLabel.setFont(font);
 		usrnmLabel.setText("Username:");
@@ -77,19 +77,19 @@ public class Signup extends JFrame {
 		
 		//********************||Initialize Signup Button and its ActionListener||*********************
 		signupButton.setFont(font);
-		signupButton.setText("Sign up!");
+		signupButton.setText("Sign up");
 		ButtonListener listener = new ButtonListener();
 		signupButton.addActionListener(listener);
 		
 		loginButton.setFont(font);
-		loginButton.setText("Already have an account?  Log In!");
+		loginButton.setText("I already have an account.");
 		LoginListener loginListener = new LoginListener();
 		loginButton.addActionListener(loginListener);
 		
 		//*******************************||Initialize the text fields||*******************************
-		usrnmTextField.setMaximumSize(new Dimension(275, usrnmTextField.getPreferredSize().height));
+		usrnmTextField.setMaximumSize(new Dimension(350, usrnmTextField.getPreferredSize().height));
 		usrnmTextField.setText("");
-		psswrdTextField.setMaximumSize(new Dimension(275, psswrdTextField.getPreferredSize().height));
+		psswrdTextField.setMaximumSize(new Dimension(350, psswrdTextField.getPreferredSize().height));
 		psswrdTextField.setText("");
 		
 		//*************************||Create Panels and add to Content Pane||**************************
@@ -98,6 +98,10 @@ public class Signup extends JFrame {
 		buttonPanel = new ButtonPanel();
 		mainPanel = new MainPanel();
 		getContentPane().add(mainPanel, BorderLayout.CENTER);
+	}
+	
+	public UserManage getManager() {
+		return manager;
 	}
 	
 	/**
@@ -109,7 +113,7 @@ public class Signup extends JFrame {
 	private class UsernamePanel extends JPanel {
 		public UsernamePanel() {
 			setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-//			add(Box.createRigidArea(new Dimension(10, 0)));
+			add(Box.createRigidArea(new Dimension(30, 0)));
 			add(usrnmLabel);
 			add(usrnmTextField);
 		}
@@ -124,7 +128,7 @@ public class Signup extends JFrame {
 	private class PasswordPanel extends JPanel {
 		public PasswordPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-//			add(Box.createRigidArea(new Dimension(30, 0)));
+			add(Box.createRigidArea(new Dimension(30, 0)));
 			add(psswrdLabel);
 			add(psswrdTextField);
 		}
@@ -132,14 +136,10 @@ public class Signup extends JFrame {
 	
 	private class ButtonPanel extends JPanel {
 		public ButtonPanel() {
-			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-			signupButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-			add(signupButton);
-			add(Box.createRigidArea(new Dimension(0, 30)));
-			loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+			setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 			add(loginButton);
-			add(Box.createRigidArea(new Dimension(0, 15)));
-
+			add(Box.createRigidArea(new Dimension(30, 0)));
+			add(signupButton);
 		}
 	}
 	
@@ -153,13 +153,10 @@ public class Signup extends JFrame {
 		public MainPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 			add(Box.createRigidArea(new Dimension(0, 30)));
-			createAccountLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-			add(createAccountLabel);
-			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(usrnmPanel);
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(psswrdPanel);
-			add(Box.createRigidArea(new Dimension(0, 20)));
+			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(buttonPanel);
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(responseLabel);
@@ -176,8 +173,8 @@ public class Signup extends JFrame {
 	private class ButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			SignupManage manager = new SignupManage();
-			int check = manager.addNewAccount(usrnmTextField.getText(), String.valueOf(psswrdTextField.getPassword()));
+//			manager = new UserManage();
+			int check = manager.addNewUser(usrnmTextField.getText(), String.valueOf(psswrdTextField.getPassword()));
 			if (check == 1) {
 				responseLabel.setForeground(Color.RED);
 				responseLabel.setText("Username is already in use.");
@@ -188,7 +185,8 @@ public class Signup extends JFrame {
 				responseLabel1.setForeground(Color.RED);
 				responseLabel1.setText("one uppercase letter, one lowercase letter, and one number");
 			} else if (check == 0) {
-				JFrame frame = new EditAccount("Edit Account");
+				list = manager.getUsers();
+				JFrame frame = new Login("Log In", list);
 				frame.setResizable(false);
 				frame.setVisible(true);
 				dispose();
@@ -199,7 +197,8 @@ public class Signup extends JFrame {
 	private class LoginListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JFrame frame = new Login("Log In");
+			list = manager.getUsers();
+			JFrame frame = new Login("Log In", list);
 			frame.setResizable(false);
 			frame.setVisible(true);
 			dispose();
@@ -214,7 +213,7 @@ public class Signup extends JFrame {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		JFrame frame = new Signup("Sign Up");
+		JFrame frame = new Signup("Sign Up", null);
 		frame.setResizable(false);
 		frame.setVisible(true);
 	}
