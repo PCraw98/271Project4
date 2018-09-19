@@ -1,3 +1,5 @@
+package login;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,6 +17,12 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import user.UserManage;
+import user.EditAccount;
+import user.ForgotPassword;
+import user.ForgotUsername;
+import user.User;
+import signup.Signup;
 
 /**
  * The Login class creates the GUI to be used as the main login page for the application

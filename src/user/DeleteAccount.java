@@ -1,3 +1,5 @@
+package user;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,6 +14,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import signup.Signup;
+
 /**
  * The Signup class creates a GUI for the signup page. When the values entered
  * into the text fields are valid, it uses them to create a new User object.

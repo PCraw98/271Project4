@@ -1,3 +1,5 @@
+package signup;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,6 +16,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import user.User;
+import user.UserManage;
+import login.Login;
 
 /**
  * The Signup class creates a GUI for the signup page. When the values entered
