@@ -56,10 +56,14 @@ public class Login extends JFrame {
 		super(title);
 		setBounds(300,300,500,350);
 		
+		
+		add(Box.createRigidArea(new Dimension(30,0)));
+		add(signupButton);
+		
 		//*************************************\/\Main JLabels/\/***************************************
 		welcomeLabel = new JLabel();
 		welcomeLabel.setFont(font);
-		welcomeLabel.setText("Welcome to your Account!");
+		welcomeLabel.setText("Log in to your Account!");
 		usernameLabel = new JLabel();
 		usernameLabel.setFont(font);
 		usernameLabel.setText("Username:");
@@ -75,15 +79,15 @@ public class Login extends JFrame {
 		//********************\/\Initialize Signup Button and its ActionListener/\/*********************
 		loginButton.setFont(font);
 		signupButton.setFont(font);
-		loginButton.setText("Login");
-		signupButton.setText("Sign up for an Account!");
+		loginButton.setText("Log in!");
+		signupButton.setText("Don't have an account?  Sign up!");
 		ButtonListener listener = new ButtonListener();
 		loginButton.addActionListener(listener);
 		
 		//*******************************\/\Initialize the text fields/\/*******************************
-		usernameTextField.setMaximumSize(new Dimension(350, usernameTextField.getPreferredSize().height));
+		usernameTextField.setMaximumSize(new Dimension(250, usernameTextField.getPreferredSize().height));
 		usernameTextField.setText("");
-		passwordTextField.setMaximumSize(new Dimension(350, passwordTextField.getPreferredSize().height));
+		passwordTextField.setMaximumSize(new Dimension(250, passwordTextField.getPreferredSize().height));
 		passwordTextField.setText("");
 		
 		
@@ -145,9 +149,7 @@ public class Login extends JFrame {
 	private class ButtonPanel extends JPanel {
 		public ButtonPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-			add(Box.createRigidArea(new Dimension(30,0)));
 			add(loginButton);
-			add(Box.createRigidArea(new Dimension(30,0)));
 			add(signupButton);
 		}
 	}
@@ -180,11 +182,16 @@ public class Login extends JFrame {
 			add(usernamePanel);
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(passwordPanel);
+			add(Box.createRigidArea(new Dimension(0, 20)));
+			loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+			add(loginButton);
+
+			add(Box.createRigidArea(new Dimension(0, 30)));
+			buttonPanel1.setAlignmentX(Component.CENTER_ALIGNMENT);
+			add(buttonPanel1);
+			buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(buttonPanel);
-			add(Box.createRigidArea(new Dimension(0, 30)));
-			add(buttonPanel1);
-			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(responseLabel);
 		}
 		
