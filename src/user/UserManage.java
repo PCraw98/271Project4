@@ -126,13 +126,15 @@ public class UserManage {
 	
 	/**
 	 * Sets a new (valid) password for valid user
+	 * @param username
 	 * @param password1
 	 * @param password2
-	 * @return
+	 * @return 0 if password was successfully changed, 1 if username cannot 
+	 *  be found, 2 if passwords don't match, 3 if password is invalid
 	 */
 	public int setNewPassword(String username, String password1, String password2) {
 		if(isUsernameInUse(username) == true) {
-			if(password1 == password2) {
+			if(password1.equals(password2)) {
 				if(isValidPassword(password1) == true) {
 					for(int i=0; i < users.size(); i++) {
 						User currUser = users.get(i);
