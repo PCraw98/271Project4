@@ -1,5 +1,3 @@
-package user;
-
 import java.io.Console;
 import java.util.ArrayList;
 
@@ -137,8 +135,10 @@ public class UserManage {
 			if(password1.equals(password2)) {
 				if(isValidPassword(password1) == true) {
 					for(int i=0; i < users.size(); i++) {
+						System.out.println("for loop");
 						User currUser = users.get(i);
-						if(currUser.getUsername().equals(currUserLoggedIn)) {
+						if(currUser.getUsername().equals(username)) {
+							System.out.println("if statement");
 							currUser.setPassword(password1);
 							return 0;
 						}
