@@ -1,3 +1,5 @@
+package user;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import login.Login;
 
 /**
  * Creates a GUI for the Forgot Password page. When the values entered into

@@ -1,3 +1,10 @@
+package user;
+
+/**
+ * Creates a User object to be used with UserManage.
+ * Contains methods required to make changes to a User;
+ * @author Jasmine Jess
+ */
 public class User {
 	private String username;
 	private String password;
@@ -7,11 +14,19 @@ public class User {
 		this.password = password;
 	}
 	
+	/**
+	 * Set new password
+	 * @param pass
+	 */
 	public void setPassword(String pass) {
 		password = pass;
 		
 	}
 	
+	/**
+	 * Gets user's username
+	 * @return username
+	 */
 	public String getUsername() {
 		return username;
 	}

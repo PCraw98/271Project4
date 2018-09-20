@@ -1,4 +1,5 @@
-import java.io.Console;
+package user;
+
 import java.util.ArrayList;
 
 /**
@@ -22,10 +23,18 @@ public class UserManage {
 		addNewUser("admin", "Password123");
 	}
 	
+	/**
+	 * Returns array of user accounts
+	 * @return ArrayList of users
+	 */
 	public ArrayList<User> getUsers() {
 		return users;
 	}
 	
+	/**
+	 * Sets ArrayList
+	 * @param list
+	 */
 	public void setUsers(ArrayList<User> list) {
 		users = list;
 	}

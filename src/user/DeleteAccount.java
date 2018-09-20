@@ -1,3 +1,5 @@
+package user;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,6 +14,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import signup.Signup;
+
 /**
  * Creates a GUI for the Delete Account page. If you confirm you wish to
  * delete you account, it does this then takes you back to the signup page.
