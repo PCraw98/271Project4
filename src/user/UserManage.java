@@ -104,6 +104,13 @@ public class UserManage {
 		return false;
 	}
 	
+	/**
+	 * Checks if username and password both constitute a valid user
+	 * @param username
+	 * @param password
+	 * @return 0 if successful, 1 if username cannot be found, 
+	 *  2 if password is incorrect
+	 */
 	public int isValidAccount(String username, String password) {
 		for(int i = 0; i < users.size(); i++) {
 			User currUser = users.get(i);
@@ -115,6 +122,28 @@ public class UserManage {
 			}
 		}
 		return 1;
+	}
+	
+	/**
+	 * Sets a new (valid) password for valid user
+	 * @param password1
+	 * @param password2
+	 * @return
+	 */
+	public int setNewPassword(String username, String password1, String password2) {
+		if(isUsernameInUse(username) == true) {
+			if(password1 == password2) {
+				if(isValidPassword(password1) == true) {
+					for(int i=0; i < users.size(); i++) {
+						User currUser = users.get(i);
+						if(currUser.getUsername().equals(currUserLoggedIn)) {
+							currUser.setPassword(password1);
+							return 0;
+						}
+					}
+				} return 3; //if password is invalid
+			} return 2; //if passwords don't match
+		} return 1; //if username cannot be found
 	}
 	
 	/**

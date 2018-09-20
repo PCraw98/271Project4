@@ -11,7 +11,6 @@ public class User {
 	
 	public void setPassword(String pass) {
 		password = pass;
-		
 	}
 	
 	public String getUsername() {
