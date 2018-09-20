@@ -1,5 +1,3 @@
-package signup;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,10 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
-import user.User;
-import user.UserManage;
-import login.Login;
 
 /**
  * The Signup class creates a GUI for the signup page. When the values entered
@@ -48,10 +42,13 @@ public class Signup extends JFrame {
 	
 	/**
 	 * Overrides the JFrame constructor. Takes in a String as a title,
-	 * then sets up every element of the GUI to be passed in to the JPanel
+	 * and the ArrayList that contains the current users. The ArrayList is
+	 * passed around in order to access it across each class. This then
+	 * sets up every element of the GUI to be passed in to the JPanel
 	 * classes.
 	 * 
 	 * @param title
+	 * @param list
 	 */
 	public Signup(String title, ArrayList<User> list) {
 		super(title);
@@ -62,8 +59,6 @@ public class Signup extends JFrame {
 		}
 		
 		setBounds(300,300,600,300);
-		
-		/* Try to get the Panels to stop shrinking when you press a button. Also put some space between the labels and text fields. */
 		
 		//*************************************||Main JLabels||***************************************
 		usrnmLabel = new JLabel();
@@ -140,6 +135,12 @@ public class Signup extends JFrame {
 		}
 	}
 	
+	/**
+	 * Creates a JPanel that contains the two buttons to be added to
+	 * the main panel.
+	 * 
+	 * @author Elijah Rogers
+	 */
 	private class ButtonPanel extends JPanel {
 		public ButtonPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -179,7 +180,6 @@ public class Signup extends JFrame {
 	private class ButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-//			manager = new UserManage();
 			int check = manager.addNewUser(usrnmTextField.getText(), String.valueOf(psswrdTextField.getPassword()));
 			if (check == 1) {
 				responseLabel.setForeground(Color.RED);
@@ -200,6 +200,12 @@ public class Signup extends JFrame {
 		}
 	}
 	
+	/**
+	 * ActionListener for the "I already have an account" button. Takes
+	 * you to the login page.
+	 * 
+	 * @author Elijah Rogers
+	 */
 	private class LoginListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
