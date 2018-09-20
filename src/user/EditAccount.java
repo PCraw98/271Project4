@@ -1,5 +1,3 @@
-package user;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -13,19 +11,17 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import login.Login;
-
 /**
- * The Signup class creates a GUI for the signup page. When the values entered
- * into the text fields are valid, it uses them to create a new User object.
- * The checks for valid login info are handed by SignupManage.java.
+ * Creates a GUI for the Edit Account page. Contains buttons that can take
+ * you to every feature a signed-in user can access: retrieve username,
+ * change password, delete account, and log out.
  * 
  * @author Elijah Rogers
  */
 @SuppressWarnings("serial")
 public class EditAccount extends JFrame {
 	
-	//***********************||Instance Variables||***********************
+	//************************||Instance Variables||*************************
 	private Font font = new java.awt.Font("Dialog", 0, 13);
 	private MainPanel mainPanel;
 	private ButtonPanel buttonPanel;
@@ -48,43 +44,47 @@ public class EditAccount extends JFrame {
 		this.current = current;
 		setBounds(300,300,400,300);
 		
-		/* Try to get the buttons to be centered. It'll look better. */
-		
-		//||Retrieve Username Button||
+		//**************||Retrieve Username Button||***************
 		retrieveButton = new JButton();
 		retrieveButton.setFont(font);
 		retrieveButton.setText("Retrieve Username");
 		RetrieveListener retrieveListener = new RetrieveListener();
 		retrieveButton.addActionListener(retrieveListener);
 		
-		//||Forgot Password Button||
+		//************||Forgot Password Button||*************
 		forgotButton = new JButton();
 		forgotButton.setFont(font);
 		forgotButton.setText("Forgot Password");
 		ForgotListener forgotListener = new ForgotListener();
 		forgotButton.addActionListener(forgotListener);
 		
-		//||Delete Account Button||
+		//*************||Delete Account Button||*************
 		deleteButton = new JButton();
 		deleteButton.setFont(font);
 		deleteButton.setText("Delete Account");
 		DeleteListener deleteListener = new DeleteListener();
 		deleteButton.addActionListener(deleteListener);
 		
-		//||Log Out Button||
+		//****************||Log Out Button||*****************
 		logoutButton = new JButton();
 		logoutButton.setFont(font);
 		logoutButton.setText("Log Out");
 		LogoutListener logoutListener = new LogoutListener();
 		logoutButton.addActionListener(logoutListener);
 		
-		//||JPanels||
+		//********************||JPanels||********************
 		buttonPanel = new ButtonPanel();
 		emptyPanel = new EmptyPanel();
 		mainPanel = new MainPanel();
 		getContentPane().add(mainPanel, BorderLayout.CENTER);
 	}
 	
+	/**
+	 * ActionListener for the retrieve username button. Pulls up
+	 * the retrieve username button.
+	 * 
+	 * @author Elijah Rogers
+	 */
 	private class RetrieveListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -94,15 +94,28 @@ public class EditAccount extends JFrame {
 		}
 	}
 	
+	/**
+	 * ActionListener for the forgot password button. Takes you to the
+	 * forgot password page.
+	 * 
+	 * @author Elijah Rogers
+	 */
 	private class ForgotListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JFrame frame = new ForgotPassword("Forgot Password", list);
+			JFrame frame = new ForgotPassword("Forgot Password", list, current);
 			frame.setResizable(false);
 			frame.setVisible(true);
+			dispose();
 		}
 	}
 	
+	/**
+	 * ActionListener for the delete account button. takes you to the
+	 * delete account page.
+	 * 
+	 * @author Elijah Rogers
+	 */
 	private class DeleteListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -113,6 +126,12 @@ public class EditAccount extends JFrame {
 		}
 	}
 	
+	/**
+	 * ActionListener for the log out button. Takes you back to
+	 * the login page.
+	 * 
+	 * @author Elijah Rogers
+	 */
 	private class LogoutListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -123,10 +142,14 @@ public class EditAccount extends JFrame {
 		}
 	}
 	
+	/**
+	 * Creates a JPanel that contains all four of the buttons.
+	 * 
+	 * @author Elijah Rogers
+	 */
 	private class ButtonPanel extends JPanel {
 		public ButtonPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-//			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(retrieveButton);
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(forgotButton);
@@ -150,6 +173,12 @@ public class EditAccount extends JFrame {
 		}
 	}
 	
+	/**
+	 * Creates the main JPanel, which contains the button and
+	 * empty panels.
+	 * 
+	 * @author Elijah Rogers
+	 */
 	private class MainPanel extends JPanel {
 		public MainPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -157,16 +186,4 @@ public class EditAccount extends JFrame {
 			add(buttonPanel);
 		}
 	}
-	
-	/**
-	 * Main method. Calls the signup constructor to create
-	 * the GUI.
-	 * 
-	 * @param args
-	 */
-//	public static void main(String[] args) {
-//		JFrame frame = new EditAccount("Edit Account", null);
-//		frame.setResizable(false);
-//		frame.setVisible(true);
-//	}
 }

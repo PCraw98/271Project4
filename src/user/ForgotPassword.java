@@ -1,6 +1,5 @@
-package user;
-
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -17,9 +16,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
- * The Signup class creates a GUI for the signup page. When the values entered
- * into the text fields are valid, it uses them to create a new User object.
- * The checks for valid login info are handed by SignupManage.java.
+ * Creates a GUI for the Forgot Password page. When the values entered into
+ * the the fields are valid, it replaces the password for the given username's
+ * account and closes.
  * 
  * @author Elijah Rogers
  */
@@ -32,13 +31,16 @@ public class ForgotPassword extends JFrame {
 	private JPasswordField psswrdTextField = new JPasswordField();
 	private JPasswordField cnfrmpsswrdTextField = new JPasswordField();
 	private JButton submitButton = new JButton();
+	private JButton editButton = new JButton();
 	private Font font = new java.awt.Font("Dialog", 0, 13);
 	private UsernamePanel usrnmPanel;
 	private PasswordPanel psswrdPanel;
 	private PasswordPanel1 cnfrmpsswrdPanel;
+	private ButtonPanel buttonPanel;
 	private MainPanel mainPanel;
 	
 	private ArrayList<User> list;
+	private String current;
 	
 	/**
 	 * Overrides the JFrame constructor. Takes in a String as a title,
@@ -46,11 +48,13 @@ public class ForgotPassword extends JFrame {
 	 * classes.
 	 * 
 	 * @param title
+	 * @param list
 	 */
-	public ForgotPassword(String title, ArrayList<User> list) {
+	public ForgotPassword(String title, ArrayList<User> list, String current) {
 		super(title);
 		this.list = list;
-		setBounds(300,300,600,300);
+		this.current = current;
+		setBounds(300,300,600,350);
 		
 		//*************************************||Main JLabels||***************************************
 		usrnmLabel = new JLabel();
@@ -77,6 +81,11 @@ public class ForgotPassword extends JFrame {
 		ButtonListener listener = new ButtonListener();
 		submitButton.addActionListener(listener);
 		
+		editButton.setFont(font);
+		editButton.setText("Return to Account");
+		EditListener editListener = new EditListener();
+		editButton.addActionListener(editListener);
+		
 		//*******************************||Initialize the text fields||*******************************
 		usrnmTextField.setMaximumSize(new Dimension(350, usrnmTextField.getPreferredSize().height));
 		usrnmTextField.setText("");
@@ -89,6 +98,7 @@ public class ForgotPassword extends JFrame {
 		usrnmPanel = new UsernamePanel();
 		psswrdPanel = new PasswordPanel();
 		cnfrmpsswrdPanel = new PasswordPanel1();
+		buttonPanel = new ButtonPanel();
 		mainPanel = new MainPanel();
 		getContentPane().add(mainPanel, BorderLayout.CENTER);
 	}
@@ -123,12 +133,33 @@ public class ForgotPassword extends JFrame {
 		}
 	}
 	
+	/**
+	 * Creates a JPanel that sets up the second Password field
+	 * 
+	 * @author Elijah Rogers
+	 */
 	private class PasswordPanel1 extends JPanel {
 		public PasswordPanel1() {
 			setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 			add(Box.createRigidArea(new Dimension(30, 0)));
 			add(cnfrmpsswrdLabel);
 			add(cnfrmpsswrdTextField);
+		}
+	}
+	
+	/**
+	 * Creates a JPanel that contains the buttons. Only gets used if
+	 * you access this page from Edit Account. Otherwise, there will
+	 * only be a submit button.
+	 * 
+	 * @author Elijah Rogers
+	 */
+	private class ButtonPanel extends JPanel {
+		public ButtonPanel() {
+			setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+			add(editButton);
+			add(Box.createRigidArea(new Dimension(30, 0)));
+			add(submitButton);
 		}
 	}
 	
@@ -148,7 +179,11 @@ public class ForgotPassword extends JFrame {
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(cnfrmpsswrdPanel);
 			add(Box.createRigidArea(new Dimension(0, 30)));
-			add(submitButton);
+			if (current == null) {
+				add(submitButton);
+			} else {
+				add(buttonPanel);
+			}
 			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(responseLabel);
 			add(responseLabel1);
@@ -164,21 +199,53 @@ public class ForgotPassword extends JFrame {
 	private class ButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// If username doesn't match valid account, "Username does not match valid account."
-			// If username works, but passwords don't match doesn't, "Password entries do not match."
-			// If username works, passwords match, but password doesn't work, "Invalid Password."
+			UserManage manager = new UserManage();
+			manager.setUsers(list);
+			int check = manager.setNewPassword(usrnmTextField.getText(), String.valueOf(psswrdTextField.getPassword()), String.valueOf(cnfrmpsswrdTextField.getPassword()));
+			if (check == 1) {
+				responseLabel.setForeground(Color.RED);
+				responseLabel.setText("Username does not exist.");
+				responseLabel1.setText("");
+			} else if (check == 2) {
+				responseLabel.setForeground(Color.RED);
+				responseLabel.setText("Passwords do not match.");
+				responseLabel1.setText("");
+			} else if (check == 3) {
+				responseLabel.setForeground(Color.RED);
+				responseLabel.setText("Password is invalid. Must be at least eight characters, with");
+				responseLabel1.setForeground(Color.RED);
+				responseLabel1.setText("one uppercase letter, one lowercase letter, and one number");
+			} else if (check == 0) {
+				System.out.println("check");
+				list = manager.getUsers();
+				if (current != null) {
+					JFrame frame = new EditAccount("Edit Account", list, current);
+					frame.setResizable(false);
+					frame.setVisible(true);
+					dispose();
+				} else {
+					JFrame frame = new Login("Log In", list);
+					frame.setResizable(false);
+					frame.setVisible(true);
+					dispose();
+				}
+			}
 		}
 	}
 	
 	/**
-	 * Main method. Calls the signup constructor to create
-	 * the GUI.
+	 * ActionListener for the "Return to account" button. Closes the current
+	 * window and takes you back to Edit Account.
 	 * 
-	 * @param args
+	 * @author Elijah Rogers
 	 */
-//	public static void main(String[] args) {
-//		JFrame frame = new ForgotPassword("Forgot Password", null);
-//		frame.setResizable(false);
-//		frame.setVisible(true);
-//	}
+	private class EditListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JFrame frame = new EditAccount("Edit Account", list, current);
+			frame.setResizable(false);
+			frame.setVisible(true);
+			dispose();
+		}
+	}
 }

@@ -1,5 +1,3 @@
-package user;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -13,6 +11,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * Creates a GUI for the Retrieve Username Page. Displays the 
+ * username of the user currently logged in with a JLabel.
+ * The user can then close the window.
+ * 
+ * @author Elijah Rogers
+ */
 @SuppressWarnings("serial")
 public class RetrieveUsername extends JFrame {
 
@@ -24,7 +29,16 @@ public class RetrieveUsername extends JFrame {
 	
 	private ArrayList<User> list;
 	private String current;
-
+	
+	/**
+	 * Overrides the JFrame constructor. Takes in a String as a title,
+	 * then sets up every element of the GUI to be passed in to the JPanel
+	 * classes.
+	 * 
+	 * @param title
+	 * @param list
+	 * @param current
+	 */
 	public RetrieveUsername(String title, ArrayList<User> list, String current) {
 		super(title);
 		this.list = list;
@@ -33,7 +47,8 @@ public class RetrieveUsername extends JFrame {
 		manager = new UserManage();
 		manager.setUsers(this.list);
 		manager.setUsername(current);
-
+		
+		//****************||JLabels||****************
 		label = new JLabel();
 		label.setFont(font);
 		label.setForeground(Color.BLACK);
@@ -43,11 +58,18 @@ public class RetrieveUsername extends JFrame {
 		usernameLabel.setFont(font);
 		usernameLabel.setForeground(Color.BLACK);
 		usernameLabel.setText(manager.getUsername());
-
+		
+		//********************||JPanel||*********************
 		mainPanel = new MainPanel();
 		getContentPane().add(mainPanel, BorderLayout.CENTER);
 	}
-
+	
+	/**
+	 * Creates the JPanel displayed. Contains the labels for
+	 * telling the user their username.
+	 * 
+	 * @author Elijah Rogers
+	 */
 	private class MainPanel extends JPanel {
 		public MainPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -61,11 +83,4 @@ public class RetrieveUsername extends JFrame {
 			add(usernameLabel);
 		}
 	}
-
-//	public static void main(String[] args) {
-//		JFrame frame = new RetrieveUsername("Retrieve Username", null);
-//		frame.setResizable(false);
-//		frame.setVisible(true);
-//	}
-
 }

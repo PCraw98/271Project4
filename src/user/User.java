@@ -1,5 +1,3 @@
-package user;
-
 public class User {
 	private String username;
 	private String password;
@@ -11,6 +9,7 @@ public class User {
 	
 	public void setPassword(String pass) {
 		password = pass;
+		
 	}
 	
 	public String getUsername() {

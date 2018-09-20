@@ -1,5 +1,3 @@
-package user;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,13 +12,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import signup.Signup;
-
 /**
- * The Signup class creates a GUI for the signup page. When the values entered
- * into the text fields are valid, it uses them to create a new User object.
- * The checks for valid login info are handed by SignupManage.java.
+ * Creates a GUI for the Delete Account page. If you confirm you wish to
+ * delete you account, it does this then takes you back to the signup page.
  * 
  * @author Elijah Rogers
  */
@@ -55,33 +49,33 @@ public class DeleteAccount extends JFrame {
 		this.current = current;
 		setBounds(300,300,300,300);
 		
-		/* Try to get the label to actually be centered. I have no idea what's wrong. */
-		
-		//||Yes Button||
+		//**************||Yes Button||**************
 		yesButton = new JButton();
 		yesButton.setFont(font);
 		yesButton.setText("Yes");
 		YesListener yesListener = new YesListener();
 		yesButton.addActionListener(yesListener);
 		
-		//||No Button||
+		//*************||No Button||*************
 		noButton = new JButton();
 		noButton.setFont(font);
 		noButton.setText("No");
 		NoListener noListener = new NoListener();
 		noButton.addActionListener(noListener);
 		
+		//*********||JLabel||**********
 		label = new JLabel();
 		label.setFont(font);
 		label.setText("Are you sure?");
 		
-		//||Bottom Section||
+		//**************||Bottom Section||***************
 		deleted = new JLabel();
 		deleted.setFont(font);
 		deleted.setForeground(Color.BLUE);
 		deleted.setText("Account successfully deleted.");
 		deleted.setVisible(false);
 		
+		//*****************||Signup Button||*****************
 		returnToSignup = new JButton();
 		returnToSignup.setFont(font);
 		returnToSignup.setText("Return to Signup");
@@ -89,7 +83,7 @@ public class DeleteAccount extends JFrame {
 		returnToSignup.addActionListener(signupListener);
 		returnToSignup.setVisible(false);
 		
-		//||JPanels||
+		//*******************||JPanels||*********************
 		buttonPanel = new ButtonPanel();
 		emptyPanel = new EmptyPanel();
 		confirmPanel = new ConfirmPanel();
@@ -97,6 +91,12 @@ public class DeleteAccount extends JFrame {
 		getContentPane().add(mainPanel, BorderLayout.CENTER);
 	}
 	
+	/**
+	 * ActionListener for the yes button. Deletes the account
+	 * and reveals the invisible elements of the GUI.
+	 * 
+	 * @author Elijah Rogers
+	 */
 	private class YesListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -111,6 +111,12 @@ public class DeleteAccount extends JFrame {
 		}
 	}
 	
+	/**
+	 * ActionListener for the no button. Takes you back to the edit
+	 * account page.
+	 * 
+	 * @author Elijah Rogers
+	 */
 	private class NoListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -121,6 +127,13 @@ public class DeleteAccount extends JFrame {
 		}
 	}
 	
+	/**
+	 * ActionListener for the return to signup button.
+	 * Takes you to the signup page once your account is
+	 * deleted.
+	 * 
+	 * @author Elijah Rogers
+	 */
 	private class SignupListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -131,6 +144,12 @@ public class DeleteAccount extends JFrame {
 		}
 	}
 	
+	/**
+	 * Creates a JPanel that contains the elements that become
+	 * visible after you press the yes button
+	 * 
+	 * @author Elijah Rogers
+	 */
 	private class ConfirmPanel extends JPanel {
 		public ConfirmPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -140,10 +159,14 @@ public class DeleteAccount extends JFrame {
 		}
 	}
 	
+	/**
+	 * Creates a JPanel that contains the yes and no buttons.
+	 * 
+	 * @author Elijah Rogers
+	 */
 	private class ButtonPanel extends JPanel {
 		public ButtonPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-//			add(Box.createRigidArea(new Dimension(0, 30)));
 			add(yesButton);
 			add(Box.createRigidArea(new Dimension(30, 0)));
 			add(noButton);
@@ -163,6 +186,12 @@ public class DeleteAccount extends JFrame {
 		}
 	}
 	
+	/**
+	 * Creates the main JPanel. Contains the empty, button,
+	 * and confirm panels.
+	 * 
+	 * @author Elijah Rogers
+	 */
 	private class MainPanel extends JPanel {
 		public MainPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -174,16 +203,4 @@ public class DeleteAccount extends JFrame {
 			add(confirmPanel);
 		}
 	}
-	
-	/**
-	 * Main method. Calls the signup constructor to create
-	 * the GUI.
-	 * 
-	 * @param args
-	 */
-//	public static void main(String[] args) {
-//		JFrame frame = new DeleteAccount("Delete Account", null);
-//		frame.setResizable(false);
-//		frame.setVisible(true);
-//	}
 }
