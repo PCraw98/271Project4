@@ -1,5 +1,3 @@
-package login;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,12 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import user.UserManage;
-import user.EditAccount;
-import user.ForgotPassword;
-import user.ForgotUsername;
-import user.User;
-import signup.Signup;
 
 /**
  * The Login class creates the GUI to be used as the main login page for the application
@@ -157,7 +149,8 @@ public class Login extends JFrame {
 	
 	/**
 	 * Adds a second Button Panel that contains forgot username
-	 * and password
+	 * and password.
+	 * 
 	 * @author Elijah Rogers
 	 */
 	private class ButtonPanel1 extends JPanel {
@@ -219,6 +212,8 @@ public class Login extends JFrame {
 	}
 	
 	/**
+	 * ActionListener for the forgot username button. Opens a window
+	 * informing the user this feature hasn't been implemented yet.
 	 * 
 	 * @author Elijah Rogers
 	 */
@@ -232,13 +227,15 @@ public class Login extends JFrame {
 	}
 	
 	/**
+	 * ActionListener for the forgot password button. Takes you to the
+	 * forgot password page.
 	 * 
 	 * @author Elijah Rogers
 	 */
 	private class PasswordListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JFrame frame = new ForgotPassword("Forgot Password", list);
+			JFrame frame = new ForgotPassword("Forgot Password", list, null);
 			frame.setResizable(false);
 			frame.setVisible(true);
 			dispose();
@@ -246,6 +243,8 @@ public class Login extends JFrame {
 	}
 	
 	/**
+	 * ActionListener for the "I don't have an account" button. Takes
+	 * you to the signup page.
 	 * 
 	 * @author Elijah Rogers
 	 */
@@ -258,14 +257,4 @@ public class Login extends JFrame {
 			dispose();
 		}
 	}
-	
-	/**
-	 * Creates the frame and adds all everything to the frame. 
-	 * @param args
-	 */
-//	public static void main(String[] args) {
-//		JFrame frame = new Login("Login Screen");
-//		frame.setResizable(false);
-//		frame.setVisible(true);
-//	}
 }
