@@ -1,6 +1,6 @@
 *******************
 * Project 4
-* CS354
+* CS271
 * Group 2
 * 19 September 2018
 *******************
@@ -29,7 +29,7 @@ INCLUDED FILES:
 
 COMPILING AND RUNNING:
 
- To compile, run Signup.java
+ To compile, run main method from Signup.java
 
 
 TESTING:
